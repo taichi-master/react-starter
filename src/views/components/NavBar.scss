@@ -1,0 +1,89 @@
+@import 'variables';
+
+nav.bar {
+  position: fixed;
+  // position: absolute;
+  width: 100%;
+  font-weight: 600;
+  z-index: 1000;
+
+  > a {
+    float: left;
+    margin: 0 2em;
+  }
+
+
+  ul {
+    background: yellow;
+    transition: all 0.4s ease-in-out;
+    box-shadow: 10px 10px 5px #888;
+
+    li {
+      margin: 0;
+      list-style: none;
+      height: 45px;
+
+      a {
+        display: inline-block;
+        width: 100%;
+        white-space: nowrap;
+        color: red;
+        padding: 10px 20px;
+        text-decoration: none;
+
+        span.name {
+          float: left;
+        }
+
+        span.caret {
+          float: right;
+          margin-left: 0.5em;
+          color: grey;
+        }
+      }
+
+      ul.submenu {
+        li {
+          position: relative;
+        }
+        ul.submenu {
+          position: absolute;
+          top: 0;
+          left: 101%;
+        }
+      }
+    }
+
+    // hover doesn't work in touch-device, such as your smart-phone
+    // li:hover {
+    li.show {
+      > ul {
+        visibility: visible;
+        opacity: 1;
+      }
+    }
+    li:hover {
+      > a {
+        background: rgba(0,0,0,0.2);
+      }
+    }
+  }
+
+  > ul {
+
+    ul {
+      position: absolute;
+      visibility: hidden;
+      opacity: 0;
+    }
+    > li {
+      float: left;
+    }
+  }
+
+  .main-menu:after {
+    display: block;
+    content: ' ';
+    clear: both;
+  }
+}
