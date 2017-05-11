@@ -1,4 +1,6 @@
 import React from 'react'
+import PropTypes from 'prop-types'
+
 import style from './style.scss'
 
 import HotReloadDemo from 'containers/Hot-Reload-Demo'
@@ -43,4 +45,10 @@ export default class Home extends React.Component {
       </div>
     );
   }
+}
+
+Home.propTypes = {
+  isFetching: PropTypes.bool.isRequired,
+  features: PropTypes.array.isRequired,
+  getFeatures: PropTypes.func.isRequired,
 }

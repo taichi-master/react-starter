@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 import style from './Hot-Reload-Demo.scss'
 
@@ -41,4 +42,10 @@ export default class HotReloadDemo extends React.Component {
       </section>
     )
   }
+}
+
+HotReloadDemo.propTypes = {
+  value: PropTypes.string.isRequired,
+  setValue: PropTypes.func.isRequired,
+  children: PropTypes.string
 }
