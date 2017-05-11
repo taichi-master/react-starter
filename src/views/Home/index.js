@@ -20,9 +20,10 @@ export default class Home extends React.Component {
     return (
       <div className="home">
         <h1>Home...</h1>
+
         <h1 className="project">{pkg.name}</h1>
 
-        <section className="Redux">
+        <section className="redux">
           <h1>Redux Async Action</h1>
           <ul>
             <lh><span>Features</span></lh>

@@ -1,4 +1,4 @@
-TESTS += test/**/*.test.js src/**/*.test.js
+TESTS += test/**/*.test.js src/**/*.test.js server/**/*.test.js
 
 testall:
 	@./node_modules/mocha/bin/mocha \

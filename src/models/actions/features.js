@@ -7,12 +7,11 @@ export const invalidateFeatures = () => ({type: types.INVALIDATE_FEATURES});
 
 const requestFeatures = () => ({type: types.REQUEST_FEATURES});
 
-const receiveFeatures = (contents) => ({
+export const receiveFeatures = (contents) => ({
     type: types.RECEIVE_FEATURES,
     contents,
     receivedAt: Date.now()
   });
-
 
 function fetchFeatures () {
   return (dispatch) => {
@@ -28,7 +27,7 @@ function fetchFeatures () {
         dispatch(receiveFeatures(json));
       })
       .catch(err => {
-        console.error(err);
+        console.log('action err', err);
       });
   }
 }

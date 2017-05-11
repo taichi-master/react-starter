@@ -4,7 +4,7 @@ export default (
   features = {
     isFetching: false,
     didInvalidate: true,
-    features: []
+    contents: []
   },
   action) => {
   switch (action.type) {
@@ -21,7 +21,7 @@ export default (
       return Object.assign({}, features, {
         isFetching: false,
         didInvalidate: false,
-        features: action.contents,
+        contents: action.contents,
         lastUpdated: action.receivedAt
       });
     default:

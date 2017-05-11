@@ -17,8 +17,16 @@ module.exports = function(config) {
     // list of files / patterns to load in the browser
     files: [
       'node_modules/babel-polyfill/dist/polyfill.js',
+      // 'src/models/actions/value.spec.js',
+      // 'src/models/actions/features.spec.js',
+      // 'src/models/reducers/value.spec.js',
+      // 'src/models/reducers/features.spec.js',
+      // 'src/views/components/NavBar.spec.js',
+      // 'src/views/components/Hot-Reload-Demo.spec.js',
+      // 'src/views/Home/index.spec.js',
+      // 'src/views/About/index.spec.js',
       'src/**/*.spec.js',
-      'test/**/*.spec.js'
+      'test/**/*.spec.js',
     ],
 
 
@@ -43,7 +51,8 @@ module.exports = function(config) {
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['progress'],
+    // reporters: ['progress', 'mocha', 'verbose'],
+    reporters: ['mocha', 'verbose'],
 
 
     // web server port

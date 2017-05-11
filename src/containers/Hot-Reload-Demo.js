@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 // import { withRouter } from 'react-router-dom'
 
-import { setValue } from 'models/actions'
+import * as actions from 'models/actions'
 import HotReloadDemo from 'components/Hot-Reload-Demo'
 
 const mapStateToProps = (state, ownProps) => {
@@ -14,7 +14,7 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     setValue: (value) => {
-      dispatch(setValue(value));
+      dispatch(actions.setValue(value));
     }
   }
 }

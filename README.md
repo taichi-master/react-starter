@@ -10,7 +10,7 @@ I used to use Bootstrap CSS for my applications, but for some reasons I decided 
 The other thing that I would like to point out is I didn't use jQuery in the project at all.  This is one of the reasons why I decided not to use Bootstrap any more.  Anyway, using jQuery defects the purpose of React.
 
 ## Features:
-- Isomorphic (universal) Single Page Application
+- React Isomorphic (universal) Single Page Application
 - ES6 Javascript
 - Webpack 2 + Express (https)
 - React Router 4 (dynamic component)
@@ -20,7 +20,7 @@ The other thing that I would like to point out is I didn't use jQuery in the pro
 - REST API
 - Sass (style)
 - No jQuery
-- Mocha (unit testing)
+- Server/Client Unit Testing (Karma Mocha Chai Sinon react-dom/test-utils)
 
 ## Installation
 ```bash
