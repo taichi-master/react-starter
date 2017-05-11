@@ -9,7 +9,7 @@
   "main": "index.js",
   "scripts": {
     "test": "npm run karma && npm run mocha",
-    "mocha": "mocha test/**/*.test.js src/**/*.test.js",
+    "mocha": "mocha test/**/*.test.js src/**/*.test.js server/**/*.test.js",
     "karma": "karma start karma.conf.js",
     "dev": "PORT=3000 supervisor -w server server",
     "build": "webpack --config webpack.production.config.js",
