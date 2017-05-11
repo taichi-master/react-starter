@@ -19,7 +19,7 @@ import HotReloadDemo from 'components/Hot-Reload-Demo'
 describe('Components', function () {
 
   describe('<HotReloadDemo/>', function () {
-    
+
     const comment = 'Enter some comments here.',
           initValue = 'abc',
           initialState = {value: initValue},
