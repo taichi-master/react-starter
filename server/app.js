@@ -2,6 +2,7 @@ const fs = require('fs'),
       path = require('path');
 
 const express = require('express'),
+      compression = require('compression'),
       favicon = require('serve-favicon'),
       bodyParser = require('body-parser'),
       logger = require('morgan'),
@@ -53,6 +54,7 @@ if (isDev) {
   Object.keys(built).forEach(k => built[k] = manifest[k]);
 }
 
+app.use(compression());
 app.use(favicon(path.resolve(__dirname, '../assets', 'favicon.ico')));
 app.use('/', express.static(path.resolve(__dirname, '../assets')));
 app.use('/', express.static(path.resolve(__dirname, '../build')));
