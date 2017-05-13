@@ -47,9 +47,10 @@ module.exports = function (env) {
   });
 
   // clean up the output folder
-  fs.readdirSync(web_config.output.path).forEach((file) => {
-    fs.unlinkSync(path.join(web_config.output.path, file));
-  });
+  if (fs.existsSync(web_config.output.path))
+    fs.readdirSync(web_config.output.path).forEach((file) => {
+      fs.unlinkSync(path.join(web_config.output.path, file));
+    });
 
   if (isChunkHash) {
     web_config.devtool = 'cheap-module-source-map';
