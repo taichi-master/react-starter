@@ -3,6 +3,7 @@ const path = require('path');
 const webpack = require('webpack');
 
 const SOURCE_DIR = path.resolve(__dirname, './src'),
+      NODE_MODULES_DIR = path.resolve(__dirname, './node_modules'),
       VIEWS_DIR = path.join(SOURCE_DIR, 'views'),
       COMPONENTS_DIR = path.join(VIEWS_DIR, 'components'),
       CONTAINERS_DIR = path.join(SOURCE_DIR, 'containers'),
@@ -18,7 +19,7 @@ module.exports = {
     main: './main.js'
   },
   output: {
-    path: path.resolve(__dirname, './build'),
+    path: path.resolve(__dirname, './dist'),
     filename: '[name].js'
   },
   module: {
@@ -34,12 +35,14 @@ module.exports = {
             ]
           }
         }
-      }
+      },
+      {test: /\.(eot|otf|png|svg|ttf|woff|woff2?)(\?.+)?$/, loader: 'url-loader'}
     ]
   },
   resolve: {
     alias: {
       'package.json': path.resolve(__dirname, './package.json'),
+      node_modules: NODE_MODULES_DIR,
       utils: UTILS_DIR,
       models: MODELS_DIR,
       views: VIEWS_DIR,
@@ -50,15 +53,6 @@ module.exports = {
     }
   },
   plugins: [
-    // new webpack.optimize.CommonsChunkPlugin({
-    //   name: 'vendor',
-    //   minChunks: function (module) {
-    //      return module.context && module.context.indexOf('node_modules') !== -1;
-    //   }
-    // }),
-    // new webpack.optimize.CommonsChunkPlugin({
-    //     name: 'manifest'
-    // }),
     new webpack.DefinePlugin({
       'process.env': {
         WEB: JSON.stringify(true)

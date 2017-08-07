@@ -3,11 +3,11 @@ const fs = require('fs'),
 
 const webpack = require('webpack'),
       webpackMerge = require('webpack-merge'),
+      CleanWebpackPlugin = require('clean-webpack-plugin'),
+      ExtractTextPlugin = require('extract-text-webpack-plugin'),
       ManifestPlugin = require('webpack-manifest-plugin');
 
 const commonConfig = require('./webpack.config.js');
-
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const LIBS_DIR = path.resolve(__dirname, './server/libs');
 
@@ -32,10 +32,16 @@ module.exports = function (env) {
       ]
     },
     plugins: [
+      new CleanWebpackPlugin([commonConfig.output.path]),
       new webpack.optimize.CommonsChunkPlugin({
         name: 'vendor',
         minChunks: function (module) {
-           return module.context && module.context.indexOf('node_modules') !== -1;
+          // This prevents stylesheet resources with the .css or .scss extension
+          // from being moved from their original chunk to the vendor chunk
+          if(module.resource && (/^.*\.(css|scss)$/).test(module.resource)) {
+            return false;
+          }
+          return module.context && module.context.indexOf("node_modules") !== -1;
         }
       }),
       new webpack.optimize.CommonsChunkPlugin({
@@ -45,12 +51,6 @@ module.exports = function (env) {
       new ManifestPlugin()
     ]
   });
-
-  // clean up the output folder
-  if (fs.existsSync(web_config.output.path))
-    fs.readdirSync(web_config.output.path).forEach((file) => {
-      fs.unlinkSync(path.join(web_config.output.path, file));
-    });
 
   if (isChunkHash) {
     web_config.devtool = 'cheap-module-source-map';
@@ -72,6 +72,7 @@ module.exports = function (env) {
       libraryTarget: 'commonjs'
     },
     plugins: [
+      new CleanWebpackPlugin([LIBS_DIR]),
       new ExtractTextPlugin({
         filename: 'dummy.css',
         allChunks: true
