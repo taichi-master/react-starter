@@ -48,7 +48,13 @@ module.exports = function (env) {
           name: 'manifest'
       }),
       new ExtractTextPlugin(isChunkHash ? 'main.[chunkhash].css' : 'main.css'),
-      new ManifestPlugin()
+      new ManifestPlugin(),
+      new webpack.DefinePlugin({
+        'process.env': {
+          BROWSER: JSON.stringify(true),
+          NODE_ENV: JSON.stringify('production')
+        }
+      })
     ]
   });
 
@@ -79,7 +85,7 @@ module.exports = function (env) {
       }),
       new webpack.DefinePlugin({
         'process.env': {
-          WEB: JSON.stringify(false),
+          BROWSER: JSON.stringify(false),
           NODE_ENV: JSON.stringify('production')
         }
       })

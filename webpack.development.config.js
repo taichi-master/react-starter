@@ -54,7 +54,13 @@ module.exports = function () {
     },
     plugins: [
       new webpack.HotModuleReplacementPlugin(),
-      new webpack.NamedModulesPlugin()
+      new webpack.NamedModulesPlugin(),
+      new webpack.DefinePlugin({
+        'process.env': {
+          BROWSER: JSON.stringify(true),
+          NODE_ENV: JSON.stringify('development')
+        }
+      })
     ]
   });
 }

@@ -53,10 +53,5 @@ module.exports = {
     }
   },
   plugins: [
-    new webpack.DefinePlugin({
-      'process.env': {
-        WEB: JSON.stringify(true)
-      }
-    })
   ]
 };
