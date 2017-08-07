@@ -1,6 +1,5 @@
 import React from 'react'
 
-// import style from './style.scss'
 import HotReloadDemo from 'containers/Hot-Reload-Demo'
 
 console.log('load About');

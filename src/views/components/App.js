@@ -1,7 +1,7 @@
+import './App.scss'
+
 import React from 'react'
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
-
-import style from './App.scss'
 
 import NavBar from 'components/NavBar'
 import FootLinks from 'components/FootLinks'

@@ -1,7 +1,7 @@
+import './style.scss'
+
 import React from 'react'
 import PropTypes from 'prop-types'
-
-import style from './style.scss'
 
 import HotReloadDemo from 'containers/Hot-Reload-Demo'
 
