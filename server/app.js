@@ -9,13 +9,6 @@ const express = require('express'),
       app = express();
 
 const pkg = require('../package.json'),
-      initialState = {value:'init'},
-      built = {
-        'main.css': 'main.css',
-        'manifest.js': 'manifest.js',
-        'vendor.js': 'vendor.js',
-        'main.js': 'main.js'
-      },
       isDev = process.env.NODE_ENV !== 'production';
 
 // React and Redux.
@@ -26,7 +19,7 @@ const React = require('react'),
       { createStore, applyMiddleware } = require('redux'), // server side redux
       thunkMiddleware = require('redux-thunk').default,
       { Provider } = require('react-redux'),
-      store = isDev ? null : createStore(require('./libs/reducers').default, initialState, applyMiddleware(thunkMiddleware));
+      store = isDev ? null : createStore(require('./libs/reducers').default, pkg.cfg.initialState, applyMiddleware(thunkMiddleware));
 
 if (isDev) {
   try {
@@ -49,9 +42,6 @@ if (isDev) {
   } catch (err) {
     console.error(err);
   }
-} else {
-  const manifest = require('../dist/manifest.json');
-  Object.keys(built).forEach(k => built[k] = manifest[k]);
 }
 
 app.use(compression());
@@ -76,39 +66,12 @@ app.get('*', function (req, res) {
     )
   );
   if (context.url) {
-    console.log('context', context.url);
     res.writeHead(301, {
       Location: context.url
    });
    res.end();
-  } else {
-    res.send(createPage(pkg, isDev ? '' : `<link rel="stylesheet" href="/${built['main.css']}" />`, initialState, appHtml));
   }
 });
-
-function createPage(pkg, style, initialState, appHtml) {
-  return `
-    <!DOCTYPE html>
-    <html>
-      <head>
-        <title>${pkg.name}</title>
-        <meta charset="UTF-8">
-        <meta name="description" content="${pkg.description}">
-        <meta name="keywords" content="${pkg.keywords.join(', ')}">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        ${style}
-        <script>window.__INITIAL_STATE__ = ${JSON.stringify(initialState)};</script>
-      </head>
-      <body>
-        <div id="app">${appHtml}</div>
-        <script src="/${built['manifest.js']}"></script>
-        <script src="/${built['vendor.js']}"></script>
-        <script src="/${built['main.js']}"></script>
-      </body>
-    </html>
-  `
-}
 
 if (module == require.main) {
   const port = process.env.PORT || '3000';

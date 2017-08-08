@@ -1,6 +1,8 @@
 const path = require('path');
 
-const webpack = require('webpack');
+const pkg = require('./package.json'),
+      webpack = require('webpack'),
+      HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const SOURCE_DIR = path.resolve(__dirname, './src'),
       NODE_MODULES_DIR = path.resolve(__dirname, './node_modules'),
@@ -53,5 +55,30 @@ module.exports = {
     }
   },
   plugins: [
+    new HtmlWebpackPlugin({
+      inject: false,
+      template: require('html-webpack-template'),
+      title: pkg.name,
+      mobile: true,
+      lang: 'en-US',
+      meta: [
+        {
+          name: 'description',
+          content: pkg.description
+        },
+        {
+          name: 'keywords',
+          content: pkg.keywords.join(', ')
+        }
+      ],
+      googleAnalytics: {
+        trackingId: pkg.cfg.googleAnalytics.trackingId,
+        pageViewOnLoad: pkg.cfg.googleAnalytics.pageViewOnLoad
+      },
+      window: {
+        __INITIAL_STATE__: pkg.cfg.initialState
+      },
+      appMountId: 'app'
+    })
   ]
 };
