@@ -55,30 +55,30 @@ module.exports = {
     }
   },
   plugins: [
-    new HtmlWebpackPlugin({
-      inject: false,
-      template: require('html-webpack-template'),
-      title: pkg.name,
-      mobile: true,
-      lang: 'en-US',
-      meta: [
-        {
-          name: 'description',
-          content: pkg.description
-        },
-        {
-          name: 'keywords',
-          content: pkg.keywords.join(', ')
-        }
-      ],
-      googleAnalytics: {
-        trackingId: pkg.cfg.googleAnalytics.trackingId,
-        pageViewOnLoad: pkg.cfg.googleAnalytics.pageViewOnLoad
-      },
-      window: {
-        __INITIAL_STATE__: pkg.cfg.initialState
-      },
-      appMountId: 'app'
-    })
+    // new HtmlWebpackPlugin({
+    //   inject: false,
+    //   template: require('html-webpack-template'),
+    //   title: pkg.name,
+    //   mobile: true,
+    //   lang: 'en-US',
+    //   meta: [
+    //     {
+    //       name: 'description',
+    //       content: pkg.description
+    //     },
+    //     {
+    //       name: 'keywords',
+    //       content: pkg.keywords.join(', ')
+    //     }
+    //   ],
+    //   googleAnalytics: {
+    //     trackingId: pkg.cfg.googleAnalytics.trackingId,
+    //     pageViewOnLoad: pkg.cfg.googleAnalytics.pageViewOnLoad
+    //   },
+    //   window: {
+    //     __INITIAL_STATE__: pkg.cfg.initialState
+    //   },
+    //   appMountId: 'app'
+    // })
   ]
 };

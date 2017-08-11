@@ -9,6 +9,12 @@ const express = require('express'),
       app = express();
 
 const pkg = require('../package.json'),
+      dist = {
+        'main.css': 'main.css',
+        'manifest.js': 'manifest.js',
+        'vendor.js': 'vendor.js',
+        'main.js': 'main.js'
+      },
       isDev = process.env.NODE_ENV !== 'production';
 
 // React and Redux.
@@ -42,6 +48,9 @@ if (isDev) {
   } catch (err) {
     console.error(err);
   }
+} else {
+  const manifest = require('../dist/manifest.json');
+  Object.keys(dist).forEach(k => dist[k] = manifest[k]);
 }
 
 app.use(compression());
@@ -68,10 +77,37 @@ app.get('*', function (req, res) {
   if (context.url) {
     res.writeHead(301, {
       Location: context.url
-   });
-   res.end();
+    });
+    res.end();
+  } else {
+    res.send(createPage(pkg, isDev ? '' : `<link rel="stylesheet" href="/${dist['main.css']}" />`, pkg.cfg.initialState, appHtml));
+    res.end();
   }
 });
+
+function createPage(pkg, style, initialState, appHtml) {
+  return `
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <title>${pkg.name}</title>
+        <meta charset="UTF-8">
+        <meta name="description" content="${pkg.description}">
+        <meta name="keywords" content="${pkg.keywords.join(', ')}">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        ${style}
+        <script>window.__INITIAL_STATE__ = ${JSON.stringify(initialState)};</script>
+      </head>
+      <body>
+        <div id="app">${appHtml}</div>
+        <script src="/${dist['manifest.js']}"></script>
+        <script src="/${dist['vendor.js']}"></script>
+        <script src="/${dist['main.js']}"></script>
+      </body>
+    </html>
+  `
+}
 
 if (module == require.main) {
   const port = process.env.PORT || '3000';
