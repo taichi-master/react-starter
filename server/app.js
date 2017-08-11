@@ -81,7 +81,6 @@ app.get('*', function (req, res) {
     res.end();
   } else {
     res.send(createPage(pkg, isDev ? '' : `<link rel="stylesheet" href="/${dist['main.css']}" />`, pkg.cfg.initialState, appHtml));
-    res.end();
   }
 });
 
