@@ -25,9 +25,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 // which defect the purpose of hot-reload.
 // However, the state in Redux store will not be affected though.
 let container;
-if (process.env.NODE_ENV === 'production')
+// if (process.env.NODE_ENV === 'production')
   container = withRouter(connect(mapStateToProps, mapDispatchToProps, null, {pure: false})(Home));
-else  // Moreover withRouter doesn't work in Unit Testing.
-  container = connect(mapStateToProps, mapDispatchToProps, null, {pure: false})(Home);
+// else  // Moreover withRouter doesn't work in Unit Testing.
+// container = connect(mapStateToProps, mapDispatchToProps, null, {pure: false})(Home);
 
 export default container;
