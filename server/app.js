@@ -38,7 +38,9 @@ if (isDev) {
 
     app.use(webpackDevMiddleware(compiler, {
       publicPath: config.output.publicPath,
-      noInfo: true,
+      logLevel: 'warn',
+      logTime: true,
+      serverSideRender: true,
       stats: {colors: true}
     }));
 
