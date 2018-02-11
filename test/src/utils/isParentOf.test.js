@@ -1,9 +1,9 @@
 const { assert, expect } = require('chai');
 
-const isParentOf = require('./isParentOf');
+const isParentOf = require('utils/isParentOf');
 
 // for demonstration I included the useless List class.  It should be removed for real project.
-const List = require('./List');
+const List = require('utils/List');
 
 describe('Utilities', function () {
 

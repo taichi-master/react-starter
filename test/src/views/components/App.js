@@ -1,3 +1,5 @@
+import './App.scss'
+
 import React from 'react'
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
 
@@ -9,7 +11,7 @@ import Bundle from 'components/Bundle'
 
 let About;
 if (process.env.BROWSER && process.env.NODE_ENV !== 'development') {
-  // require('views/About/style.scss');  // dont' forget to include this line for any lazy load component
+  require('views/About/style.scss');  // dont' forget to include this line for any lazy load component
   const loadAbout = require('bundle-loader?lazy!views/About');
   About = () => (
     // use the following when "import()"" is used instead of "bundle-loader".

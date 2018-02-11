@@ -33,7 +33,7 @@ if (isDev) {
     const webpack = require('webpack'),
           webpackDevMiddleware = require('webpack-dev-middleware'),
           webpackHotMiddleware = require('webpack-hot-middleware');
-          config = require('../webpack.development.config.js')();
+          config = require('../webpack.config.js')();
           compiler = webpack(config);
 
     app.use(webpackDevMiddleware(compiler, {

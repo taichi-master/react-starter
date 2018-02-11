@@ -1,8 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import style from './Hot-Reload-Demo.scss'
-
 const Textbox = ({value, onChange, children}) => (
   <label>
     <div>{children}</div>

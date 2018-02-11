@@ -1,6 +1,6 @@
 import { assert, expect } from 'chai'
 
-import reducer from  './features'
+import reducer from  'reducers/features'
 import * as types from 'models/actionTypes'
 
 describe('Reducers', function () {

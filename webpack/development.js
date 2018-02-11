@@ -3,12 +3,26 @@ const path = require('path');
 const webpack = require('webpack'),
       webpackMerge = require('webpack-merge');
 
-const commonConfig = require('./webpack.config.js');
+const commonConfig = require('./base.js');
 
 module.exports = function () {
   const babel = commonConfig.module.rules[0],
         plugins = babel.use.options.plugins;
-  plugins.push("transform-object-rest-spread");
+  plugins.push("react-hot-loader/babel");
+
+  commonConfig.plugins.push(
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendor',
+      minChunks: function (module) {
+         return module.context && module.context.indexOf('node_modules') !== -1;
+      }
+    })
+  );
+  commonConfig.plugins.push(
+    new webpack.optimize.CommonsChunkPlugin({
+        name: 'manifest'
+    })
+  );
 
   return webpackMerge(commonConfig, {
     devtool: 'inline-source-map',
@@ -38,11 +52,15 @@ module.exports = function () {
         }
       ]
     },
-    // externals: {
-    //   // 'cheerio': 'window',
-    //   'react/addons': true,
-    //   'react/lib/ExecutionEnvironment': true,
-    //   'react/lib/ReactContext': true
-    // }
+    plugins: [
+      new webpack.HotModuleReplacementPlugin(),
+      new webpack.NamedModulesPlugin(),
+      new webpack.DefinePlugin({
+        'process.env': {
+          BROWSER: JSON.stringify(true),
+          NODE_ENV: JSON.stringify('development')
+        }
+      })
+    ]
   });
 }

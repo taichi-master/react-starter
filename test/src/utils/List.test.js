@@ -1,6 +1,6 @@
 const { assert, expect } = require('chai');
 
-const List = require('./List');
+const List = require('utils/List');
 
 describe('Linked-List', function () {
 

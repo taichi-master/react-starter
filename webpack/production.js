@@ -7,9 +7,9 @@ const webpack = require('webpack'),
       ExtractTextPlugin = require('extract-text-webpack-plugin'),
       ManifestPlugin = require('webpack-manifest-plugin');
 
-const commonConfig = require('./webpack.config.js');
+const commonConfig = require('./base.js');
 
-const LIBS_DIR = path.resolve(__dirname, './server/libs');
+const LIBS_DIR = path.resolve(__dirname, '../server/libs');
 
 module.exports = function (env) {
   const isChunkHash = env && env.chunkhash;

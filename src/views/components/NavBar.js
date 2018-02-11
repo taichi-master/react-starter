@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom'
 
 import { app, menuItems } from 'models/constants'
 import { isParentOf } from 'utils'
-import style from './NavBar.scss'
 
 const MenuItem = ({menu, showSubmenu, lv}) => {
   return (

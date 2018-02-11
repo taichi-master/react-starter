@@ -19,7 +19,7 @@ function fetchFeatures () {
     let headers = new Headers();
         headers.append('Content-Type', 'application/json');
     // return fetch(app.getUrl.features(0)) // GET
-    return fetch(app.getUrl.features(), {method:'post', headers, body:JSON.stringify({index:0})})
+    return fetch("http:/" + app.getUrl.features(), {method:'post', headers, body:JSON.stringify({index:0})})
       .then(res => {
         return res.json()
       })
@@ -27,7 +27,7 @@ function fetchFeatures () {
         dispatch(receiveFeatures(json));
       })
       .catch(err => {
-        console.log('action err', err);
+        // console.log('action err', err);
       });
   }
 }

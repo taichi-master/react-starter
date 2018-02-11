@@ -1,5 +1,3 @@
-import './style.scss'
-
 import React from 'react'
 
 import HotReloadDemo from 'containers/Hot-Reload-Demo'
