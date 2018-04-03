@@ -90,16 +90,16 @@ module.exports = function (env) {
         }
       })
     ],
-    externals: [
-      {
-        'isomorphic-fetch': {
-          root: 'isomorphic-fetch',
-          commonjs2: 'isomorphic-fetch',
-          commonjs: 'isomorphic-fetch',
-          amd: 'isomorphic-fetch'
-        }
-      }
-    ]
+    // externals: [
+    //   {
+    //     'isomorphic-fetch': {
+    //       root: 'isomorphic-fetch',
+    //       commonjs2: 'isomorphic-fetch',
+    //       commonjs: 'isomorphic-fetch',
+    //       amd: 'isomorphic-fetch'
+    //     }
+    //   }
+    // ]
   };
   node_config.__proto__ = web_config;
 
