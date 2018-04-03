@@ -1,5 +1,5 @@
 import * as types from 'models/actionTypes'
-import fetch from 'isomorphic-fetch'
+import axios from 'axios'
 
 import { app } from 'models/constants'
 
@@ -7,24 +7,18 @@ export const invalidateFeatures = () => ({type: types.INVALIDATE_FEATURES});
 
 const requestFeatures = () => ({type: types.REQUEST_FEATURES});
 
-export const receiveFeatures = (contents) => ({
+export const receiveFeatures = (payload) => ({
     type: types.RECEIVE_FEATURES,
-    contents,
+    payload,
     receivedAt: Date.now()
   });
 
 function fetchFeatures () {
   return (dispatch) => {
     dispatch(requestFeatures())
-    let headers = new Headers();
-        headers.append('Content-Type', 'application/json');
-    // return fetch(app.getUrl.features(0)) // GET
-    return fetch(app.getUrl.features(), {method:'post', headers, body:JSON.stringify({index:0})})
+    return axios.post(app.getUrl.features(), {index:0})
       .then(res => {
-        return res.json()
-      })
-      .then(json => {
-        dispatch(receiveFeatures(json));
+        dispatch(receiveFeatures(res.data));
       })
       .catch(err => {
         console.log('action err', err);

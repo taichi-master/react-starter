@@ -27,74 +27,18 @@ const React = require('react'),
       { Provider } = require('react-redux'),
       store = isDev ? null : createStore(require('./libs/reducers').default, pkg.cfg.initialState, applyMiddleware(thunkMiddleware));
 
-if (isDev) {
-  try {
-    // Hot reload
-    const webpack = require('webpack'),
-          webpackDevMiddleware = require('webpack-dev-middleware'),
-          webpackHotMiddleware = require('webpack-hot-middleware');
-          config = require('../webpack.development.config.js')();
-          compiler = webpack(config);
-
-    app.use(webpackDevMiddleware(compiler, {
-      publicPath: config.output.publicPath,
-      noInfo: true,
-      stats: {colors: true}
-    }));
-
-    app.use(webpackHotMiddleware(compiler, {
-      log: console.log
-    }));
-  } catch (err) {
-    console.error(err);
-  }
-} else {
-  const manifest = require('../dist/manifest.json');
-  Object.keys(dist).forEach(k => dist[k] = manifest[k]);
-}
-
-app.use(compression());
-app.use(favicon(path.resolve(__dirname, '../assets', 'favicon.ico')));
-app.use('/', express.static(path.resolve(__dirname, '../assets')));
-app.use('/', express.static(path.resolve(__dirname, '../dist')));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(logger('dev'));
-
-// REST API
-app.use('/api/features', require('./api/features'));
-
-// main
-app.get('*', function (req, res) {
-  const context = {};
-  const appHtml = isDev ? '<h1>Loading...</h1>' : ReactDOMServer.renderToString(
-    React.createElement(Provider, {store},
-      React.createElement(StaticRouter, {location:req.url, context},
-        React.createElement(App)
-      )
-    )
-  );
-  if (context.url) {
-    res.writeHead(301, {
-      Location: context.url
-    });
-    res.end();
-  } else {
-    res.send(createPage(pkg, isDev ? '' : `<link rel="stylesheet" href="/${dist['main.css']}" />`, pkg.cfg.initialState, appHtml));
-  }
-});
-
 function createPage(pkg, style, initialState, appHtml) {
   return `
     <!DOCTYPE html>
     <html>
       <head>
-        <title>${pkg.name}</title>
+        <title>${pkg.cfg.name}</title>
         <meta charset="UTF-8">
         <meta name="description" content="${pkg.description}">
         <meta name="keywords" content="${pkg.keywords.join(', ')}">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         ${style}
         <script>window.__INITIAL_STATE__ = ${JSON.stringify(initialState)};</script>
       </head>
@@ -106,6 +50,70 @@ function createPage(pkg, style, initialState, appHtml) {
       </body>
     </html>
   `
+}
+
+function setRoutes (app) {
+  app.use(compression());
+  app.use(favicon(path.resolve(__dirname, '../assets', 'favicon.ico')));
+  app.use('/', express.static(path.resolve(__dirname, '../assets')));
+  app.use('/', express.static(path.resolve(__dirname, '../dist')));
+  app.use(bodyParser.json());
+  app.use(bodyParser.urlencoded({ extended: false }));
+  app.use(logger('dev'));
+
+  // REST API
+  app.use('/api/features', require('./api/features'));
+  app.enable('trust proxy');
+
+  // main
+  app.get('*', function (req, res) {
+    const context = {};
+    const appHtml = isDev ? '<h1>Loading...</h1>' : ReactDOMServer.renderToString(
+      React.createElement(Provider, {store},
+        React.createElement(StaticRouter, {location:req.url, context},
+          React.createElement(App)
+        )
+      )
+    );
+    if (context.url) {
+      res.writeHead(301, {
+        Location: context.url
+      });
+      res.end();
+    } else {
+      res.send(createPage(pkg, isDev ? '' : `<link rel="stylesheet" href="/${dist['main.css']}" />`, pkg.cfg.initialState, appHtml));
+    }
+  });
+}
+
+if (isDev) {
+  try {
+    // Hot reload
+    const webpack = require('webpack'),
+          webpackDevMiddleware = require('webpack-dev-middleware'),
+          webpackHotMiddleware = require('webpack-hot-middleware');
+          config = require('../webpack/development.js')();
+          compiler = webpack(config);
+
+    app.use(webpackDevMiddleware(compiler, {
+      publicPath: config.output.publicPath,
+      logLevel: 'warn',
+      stats: {colors: true}
+    }));
+
+    app.use(webpackHotMiddleware(compiler, {
+      log: console.log
+    }));
+
+    setRoutes(app);
+
+  } catch (err) {
+    console.error(err);
+  }
+} else {
+  const manifest = require('../dist/manifest.json');
+  Object.keys(dist).forEach(k => dist[k] = manifest[k]);
+  setRoutes(app);
 }
 
 if (module == require.main) {

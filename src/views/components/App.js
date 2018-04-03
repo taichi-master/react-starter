@@ -1,12 +1,10 @@
-import './App.scss'
-
 import React from 'react'
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
 
 import NavBar from 'components/NavBar'
 import FootLinks from 'components/FootLinks'
 import NoMatch from 'views/404'
-import Home from 'containers/Home'
+import Home from 'views/Home'
 import Bundle from 'components/Bundle'
 
 let About;

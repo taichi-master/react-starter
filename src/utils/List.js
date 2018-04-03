@@ -73,7 +73,7 @@ List.prototype.remove = function remove (position) {
       node2.previous = node0;
     node0.next = node2;
   }
-  delete node1;
+  // delete node1;
   this.length--;
   return this;
 }

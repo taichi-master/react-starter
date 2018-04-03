@@ -1,5 +1,3 @@
-import './style.scss'
-
 import React from 'react'
 
 console.log('load NoMatch');

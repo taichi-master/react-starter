@@ -10,17 +10,17 @@ I used to use Bootstrap to handle the styles for my applications, but for some r
 The other thing that I would like to point out is I didn't use jQuery in the project at all (This is one of the reasons why I decided not to use Bootstrap any more).  Anyway, using jQuery defects the purpose of React.  We should let React to manipulate the DOM for us.
 
 ## Features:
-- React Isomorphic (universal) Single Page Application
+- React 16 Isomorphic (universal) Single Page Application
 - ES6 Javascript
-- Webpack 2 + Express (https)
+- Webpack 3.11 + Express (https)
 - React Router 4 (dynamic component)
 - Lazy load components
 - Hot reload across browsers in multiple devices at the same time
 - Redux (async actions)
 - REST API
-- Sass (style)
+- Inverted CSS with Sass
 - No jQuery
-- Server/Client Unit Testing (Karma Mocha Chai Sinon react-dom/test-utils)
+- Server/Client Unit Testing (Mocha Mocha-Webpack Chai Sinon jsdom Enzyme)
 
 ## Installation
 ```bash
@@ -59,4 +59,4 @@ p.s. Before running the project in production for the first time or made some ch
 
 License:
 -------
-ISC &copy; 2017 Kei Sing Wong
+ISC &copy; 2018 Kei Sing Wong

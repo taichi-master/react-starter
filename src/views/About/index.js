@@ -1,8 +1,6 @@
-import './style.scss'
-
 import React from 'react'
 
-import HotReloadDemo from 'containers/Hot-Reload-Demo'
+import HotReloadDemo from 'components/Hot-Reload-Demo'
 
 console.log('load About');
 

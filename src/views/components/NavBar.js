@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom'
 
 import { app, menuItems } from 'models/constants'
 import { isParentOf } from 'utils'
-import style from './NavBar.scss'
 
 const MenuItem = ({menu, showSubmenu, lv}) => {
   return (
@@ -17,7 +16,7 @@ const MenuItem = ({menu, showSubmenu, lv}) => {
       <span className={menu.submenu ? 'name' : null}>{(menu.icon ? ' ' : '') + menu.name}</span>
       {
         menu.submenu ?
-          <span className="caret" onClick={showSubmenu}>{lv > 0 ? '▸' : '▾'}</span>
+          <span className="caret2" onClick={showSubmenu}>{lv > 0 ? '▸' : '▾'}</span>
         :
           null
       }

@@ -1,16 +1,23 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 
-import style from './Hot-Reload-Demo.scss'
+import { setValue } from 'actions'
 
-const Textbox = ({value, onChange, children}) => (
+const Textbox = ({ value, onChange, children }) => (
   <label>
     <div>{children}</div>
     <input type="text" placeholder="type something here..." value={value} onChange={onChange}/>
   </label>
 );
 
-export default class HotReloadDemo extends React.Component {
+class HotReloadDemo extends React.Component {
+
+  static propTypes = {
+    value: PropTypes.string.isRequired,
+    setValue: PropTypes.func.isRequired,
+    children: PropTypes.string
+  }
 
   constructor (props, context) {
     super(props, context);
@@ -18,7 +25,6 @@ export default class HotReloadDemo extends React.Component {
       value1: props.value,
       value2: ''
     }
-
     this.onChange = e => {
       this.setState({value1: e.target.value}, () => {
         this.props.setValue(this.state.value1);
@@ -29,7 +35,7 @@ export default class HotReloadDemo extends React.Component {
   render () {
 
     return (
-      <section className="hot-reload">
+      <section className="hot-reload-demo">
         <h1>Hot-Reload Demo. <span className="devOnly">(development only)</span></h1>
         <p className="instruction">To test hot-reload, type something in the textbox and then modify any content on this page.</p>
         <Textbox value={this.state.value1} onChange={this.onChange}>Redux Store State</Textbox>
@@ -44,8 +50,8 @@ export default class HotReloadDemo extends React.Component {
   }
 }
 
-HotReloadDemo.propTypes = {
-  value: PropTypes.string.isRequired,
-  setValue: PropTypes.func.isRequired,
-  children: PropTypes.string
-}
+HotReloadDemo = connect(
+    ({ value }) => ({value}),
+    {setValue}
+  )(HotReloadDemo);
+export default HotReloadDemo;
