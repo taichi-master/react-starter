@@ -21,7 +21,7 @@ function fetchFeatures () {
         dispatch(receiveFeatures(res.data));
       })
       .catch(err => {
-        console.log('action err', err);
+        // console.log('action err', err);
       });
   }
 }

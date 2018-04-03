@@ -1,0 +1,31 @@
+.home {
+  > h1:first-child {
+    margin-top: 1em;
+    margin-bottom: 1em;
+    font-size: 150%;
+  }
+
+  .project {
+    font-size: 200%;
+    margin-bottom: 1em;
+  }
+
+  ul {
+    margin-top: 1em;
+    lh {
+      font-weight: bold;
+      span {
+        text-decoration: underline;
+      }
+    }
+    lh:after {
+      content: ' (p.s. The following list is a dynamic content and doesn\'t show on the server side)';
+      color: red;
+    }
+  }
+}
+
+li:first-child {
+    background: yellow;
+    margin-top: .5em;
+}

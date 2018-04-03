@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import 'style/main.scss'
+=======
+import '../style/index.scss'
+>>>>>>> d1bfcbf95c98b9304f011151427fff07191a635d
 
 import React from 'react'
 import ReactDOM from 'react-dom'
