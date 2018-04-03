@@ -74,10 +74,6 @@ List.prototype.remove = function remove (position) {
     node0.next = node2;
   }
   // delete node1;
-<<<<<<< HEAD
-=======
-  node1 = undefined;
->>>>>>> d1bfcbf95c98b9304f011151427fff07191a635d
   this.length--;
   return this;
 }
