@@ -5,12 +5,9 @@ const pkg = require('../package.json'),
       HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const SOURCE_DIR = path.resolve(__dirname, '../src'),
-<<<<<<< HEAD
       SERVER_DIR = path.resolve(__dirname, '../server'),
       STYLE_DIR = path.resolve(__dirname, '../style'),
       TEST_DIR = path.resolve(__dirname, '../test'),
-=======
->>>>>>> d1bfcbf95c98b9304f011151427fff07191a635d
       DIST_DIR = path.resolve(__dirname, '../dist'),
       NODE_MODULES_DIR = path.resolve(__dirname, '../node_modules'),
       PACKAGE_JSON = path.resolve(__dirname, '../package.json'),
@@ -52,12 +49,9 @@ module.exports = {
   resolve: {
     alias: {
       'package.json': PACKAGE_JSON,
-<<<<<<< HEAD
       server: SERVER_DIR,
       style: STYLE_DIR,
       test: TEST_DIR,
-=======
->>>>>>> d1bfcbf95c98b9304f011151427fff07191a635d
       node_modules: NODE_MODULES_DIR,
       utils: UTILS_DIR,
       models: MODELS_DIR,
