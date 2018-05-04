@@ -38,3 +38,19 @@ $lightSecondaryColor : $lightBlack;
 
 
 $inputVerticalPadding   : $relative11px;
+
+@mixin fluid-type($min-font, $max-font, $min-screen, $max-screen) {
+    font-size: calc($min-font + #{strip-unit($max-font - $min-font)} * (100vw - $min-screen) / #{strip-unit($max-screen - $min-screen)});
+}
+
+@function strip-unit($number) {
+    @if type-of($number) == "number" and not unitless($number) {
+      @return $number / ($number * 0 + 1);
+    }
+  
+    @return $number;
+}
+  
+:root {
+    @include fluid-type(16px, 24px, 400px, 800px);
+}
