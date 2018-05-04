@@ -2,14 +2,14 @@
 import React, { Component } from 'react'
 
 class Bundle extends Component {
-  constructor (props, context) {
-    super(props, context);
+  constructor ( props, context ) {
+    super( props, context )
     this.state = {
       mod: null
     }
   }
 
-  load (props) {
+  load ( props ) {
     // <Bundle load={() => import('views/About')}>
     // props.load().then((mod) => {
     //   this.setState({
@@ -18,7 +18,7 @@ class Bundle extends Component {
     // });
 
     // <Bundle load={loadAbout}>
-    props.load((mod) => {
+    props.load(( mod ) => {
       this.setState({
         mod: mod.default ? mod.default : mod
       })
@@ -26,17 +26,17 @@ class Bundle extends Component {
   }
 
   componentWillMount () {
-    this.load(this.props)
+    this.load( this.props )
   }
 
-  componentWillReceiveProps (nextProps) {
-    if (nextProps.load !== this.props.load) {
-      this.load(nextProps)
+  componentWillReceiveProps ( nextProps ) {
+    if ( nextProps.load !== this.props.load ) {
+      this.load( nextProps )
     }
   }
 
   render () {
-    return this.state.mod ? this.props.children(this.state.mod) : this.state.mod;
+    return this.state.mod ? this.props.children( this.state.mod ) : this.state.mod
   }
 }
 

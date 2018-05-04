@@ -5,6 +5,6 @@ import features from './features'
 const appReducers = combineReducers({
   value,
   features
-});
+})
 
 export default appReducers

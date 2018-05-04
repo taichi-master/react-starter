@@ -1,33 +1,33 @@
-const fs = require('fs'),
-      path = require('path');
+const path = require( 'path' )
 
-const express = require('express'),
-      compression = require('compression'),
-      favicon = require('serve-favicon'),
-      bodyParser = require('body-parser'),
-      logger = require('morgan'),
-      app = express();
+const express = require( 'express' ),
+      compression = require( 'compression' ),
+      favicon = require( 'serve-favicon' ),
+      bodyParser = require( 'body-parser' ),
+      logger = require( 'morgan' ),
+      app = express()
 
-const pkg = require('../package.json'),
+const pkg = require( '../package.json' ),
       dist = {
         'main.css': 'main.css',
         'manifest.js': 'manifest.js',
         'vendor.js': 'vendor.js',
         'main.js': 'main.js'
       },
-      isDev = process.env.NODE_ENV !== 'production';
+      isDev = process.env.NODE_ENV !== 'production'
 
 // React and Redux.
-const React = require('react'),
-      ReactDOMServer = require('react-dom/server'),
-      { StaticRouter } = require('react-router')
-      App = isDev ? null : require('./libs/App').default,
-      { createStore, applyMiddleware } = require('redux'), // server side redux
-      thunkMiddleware = require('redux-thunk').default,
-      { Provider } = require('react-redux'),
-      store = isDev ? null : createStore(require('./libs/reducers').default, pkg.cfg.initialState, applyMiddleware(thunkMiddleware));
+const React = require( 'react' ),
+      ReactDOMServer = require( 'react-dom/server' ),
+      { StaticRouter } = require( 'react-router' )
 
-function createPage(pkg, style, initialState, appHtml) {
+App = isDev ? null : require( './libs/App' ).default,
+{ createStore, applyMiddleware } = require( 'redux' ), // server side redux
+thunkMiddleware = require( 'redux-thunk' ).default,
+{ Provider } = require( 'react-redux' ),
+store = isDev ? null : createStore( require( './libs/reducers' ).default, pkg.cfg.initialState, applyMiddleware( thunkMiddleware ))
+
+function createPage ( pkg, style, initialState, appHtml ) {
   return `
     <!DOCTYPE html>
     <html>
@@ -35,11 +35,11 @@ function createPage(pkg, style, initialState, appHtml) {
         <title>${pkg.cfg.name}</title>
         <meta charset="UTF-8">
         <meta name="description" content="${pkg.description}">
-        <meta name="keywords" content="${pkg.keywords.join(', ')}">
+        <meta name="keywords" content="${pkg.keywords.join( ', ' )}">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         ${style}
-        <script>window.__INITIAL_STATE__ = ${JSON.stringify(initialState)};</script>
+        <script>window.__INITIAL_STATE__ = ${JSON.stringify( initialState )};</script>
       </head>
       <body>
         <div id="app">${appHtml}</div>
@@ -51,73 +51,77 @@ function createPage(pkg, style, initialState, appHtml) {
   `
 }
 
-function setRoutes (app) {
-  app.use(compression());
-  app.use(favicon(path.resolve(__dirname, '../assets', 'favicon.ico')));
-  app.use('/', express.static(path.resolve(__dirname, '../assets')));
-  app.use('/', express.static(path.resolve(__dirname, '../dist')));
-  app.use(bodyParser.json());
-  app.use(bodyParser.urlencoded({ extended: false }));
-  app.use(logger('dev'));
+function setRoutes ( app ) {
+  app.use( compression())
+  app.use( favicon( path.resolve( __dirname, '../assets', 'favicon.ico' )))
+  app.use( '/', express.static( path.resolve( __dirname, '../assets' )))
+  app.use( '/', express.static( path.resolve( __dirname, '../dist' )))
+  app.use( bodyParser.json())
+  app.use( bodyParser.urlencoded({ extended: false }))
+  app.use( logger( 'dev' ))
 
   // REST API
-  app.use('/api/features', require('./api/features'));
-  app.enable('trust proxy');
+  app.use( '/api/features', require( './api/features' ))
+  app.enable( 'trust proxy' )
 
   // main
-  app.get('*', function (req, res) {
-    const context = {};
+  app.get( '*', function ( req, res ) {
+    const context = {}
     const appHtml = isDev ? '<h1>Loading...</h1>' : ReactDOMServer.renderToString(
-      React.createElement(Provider, {store},
-        React.createElement(StaticRouter, {location:req.url, context},
-          React.createElement(App)
+      React.createElement( Provider, { store },
+        React.createElement( StaticRouter, { location:req.url, context },
+          React.createElement( App )
         )
       )
-    );
-    if (context.url) {
-      res.writeHead(301, {
+    )
+
+    if ( context.url ) {
+      res.writeHead( 301, {
         Location: context.url
-      });
-      res.end();
+      })
+      res.end()
     } else {
-      res.send(createPage(pkg, isDev ? '' : `<link rel="stylesheet" href="/${dist['main.css']}" />`, pkg.cfg.initialState, appHtml));
+      res.send( createPage( pkg, isDev ? '' : `<link rel="stylesheet" href="/${dist['main.css']}" />`, pkg.cfg.initialState, appHtml ))
     }
-  });
+  })
 }
 
-if (isDev) {
+if ( isDev ) {
   try {
     // Hot reload
-    const webpack = require('webpack'),
-          webpackDevMiddleware = require('webpack-dev-middleware'),
-          webpackHotMiddleware = require('webpack-hot-middleware');
-          config = require('../webpack/development.js')();
-          compiler = webpack(config);
+    const webpack = require( 'webpack' ),
+          webpackDevMiddleware = require( 'webpack-dev-middleware' ),
+          webpackHotMiddleware = require( 'webpack-hot-middleware' )
 
-    app.use(webpackDevMiddleware(compiler, {
+    config = require( '../webpack/development.js' )()
+    compiler = webpack( config )
+
+    app.use( webpackDevMiddleware( compiler, {
       publicPath: config.output.publicPath,
       logLevel: 'warn',
-      stats: {colors: true}
-    }));
+      stats: { colors: true }
+    }))
 
-    app.use(webpackHotMiddleware(compiler, {
-      log: console.log
-    }));
+    app.use( webpackHotMiddleware( compiler, {
+      log: console.log  // eslint-disable-line
+    }))
 
-    setRoutes(app);
+    setRoutes( app )
 
-  } catch (err) {
-    console.error(err);
+  } catch ( err ) {
+    console.error( err )  // eslint-disable-line
   }
 } else {
-  const manifest = require('../dist/manifest.json');
-  Object.keys(dist).forEach(k => dist[k] = manifest[k]);
-  setRoutes(app);
+  const manifest = require( '../dist/manifest.json' )
+
+  Object.keys( dist ).forEach( k => dist[k] = manifest[k])
+  setRoutes( app )
 }
 
-if (module == require.main) {
-  const port = process.env.PORT || '3000';
-  app.listen(port, () => console.log('Listening on port', port));
+if ( module == require.main ) {
+  const port = process.env.PORT || '3000'
+
+  app.listen( port, () => console.log( 'Listening on port', port )) // eslint-disable-line
 }
 else
-  module.exports = app;
+  module.exports = app

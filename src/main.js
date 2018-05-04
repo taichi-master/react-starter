@@ -12,26 +12,26 @@ import App from 'components/App'
 
 import reducers from 'reducers'
 
-const store = createStore(reducers, window.__INITIAL_STATE__, applyMiddleware(thunkMiddleware));
+const store = createStore( reducers, window.__INITIAL_STATE__, applyMiddleware( thunkMiddleware ))
 
-const render = (Component) => {
+const render = ( Component ) => {
   ReactDOM.render(
     <AppContainer>
-      <Provider store={store}>
+      <Provider store={ store }>
         <BrowserRouter>
-          <Component/>
+          <Component />
         </BrowserRouter>
       </Provider>
     </AppContainer>,
-    document.getElementById('app')
-  );
-};
+    document.getElementById( 'app' )
+  )
+}
 
-render(App);
+render( App )
 
 // Hot Module Replacement API
-if (module.hot) {
-  module.hot.accept('components/App', () => {
-    render(App)
-  });
+if ( module.hot ) {
+  module.hot.accept( 'components/App', () => {
+    render( App )
+  })
 }

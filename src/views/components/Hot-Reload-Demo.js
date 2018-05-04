@@ -6,10 +6,10 @@ import { setValue } from 'actions'
 
 const Textbox = ({ value, onChange, children }) => (
   <label>
-    <div>{children}</div>
-    <input type="text" placeholder="type something here..." value={value} onChange={onChange}/>
+    <div>{ children }</div>
+    <input type="text" placeholder="type something here..." value={ value } onChange={ onChange } />
   </label>
-);
+)
 
 class HotReloadDemo extends React.Component {
 
@@ -19,16 +19,16 @@ class HotReloadDemo extends React.Component {
     children: PropTypes.string
   }
 
-  constructor (props, context) {
-    super(props, context);
+  constructor ( props, context ) {
+    super( props, context )
     this.state = {
       value1: props.value,
       value2: ''
     }
-    this.onChange = e => {
-      this.setState({value1: e.target.value}, () => {
-        this.props.setValue(this.state.value1);
-      });
+    this.onChange = ( e ) => {
+      this.setState({ value1: e.target.value }, () => {
+        this.props.setValue( this.state.value1 )
+      })
     }
   }
 
@@ -38,12 +38,12 @@ class HotReloadDemo extends React.Component {
       <section className="hot-reload-demo">
         <h1>Hot-Reload Demo. <span className="devOnly">(development only)</span></h1>
         <p className="instruction">To test hot-reload, type something in the textbox and then modify any content on this page.</p>
-        <Textbox value={this.state.value1} onChange={this.onChange}>Redux Store State</Textbox>
-        <Textbox value={this.state.value2} onChange={(e)=>this.setState({value2: e.target.value})}>React Component State</Textbox>
+        <Textbox value={ this.state.value1 } onChange={ this.onChange }>Redux Store State</Textbox>
+        <Textbox value={ this.state.value2 } onChange={ e=>this.setState({ value2: e.target.value }) }>React Component State</Textbox>
         <Textbox>HTML DOM State</Textbox>
         <p className="instruction">&#x0226A;Modify me here&#x0226B;</p>
         <p className="comment">
-          {this.props.children}
+          { this.props.children }
         </p>
       </section>
     )
@@ -51,7 +51,7 @@ class HotReloadDemo extends React.Component {
 }
 
 HotReloadDemo = connect(
-    ({ value }) => ({value}),
-    {setValue}
-  )(HotReloadDemo);
-export default HotReloadDemo;
+  ({ value }) => ({ value }),
+  { setValue }
+)( HotReloadDemo )
+export default HotReloadDemo

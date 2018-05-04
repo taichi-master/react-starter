@@ -2,7 +2,7 @@ import React from 'react'
 
 import HotReloadDemo from 'components/Hot-Reload-Demo'
 
-console.log('load About');
+// console.log( 'load About' )
 
 export default class About extends React.PureComponent {
   render () {

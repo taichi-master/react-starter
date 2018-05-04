@@ -7,9 +7,9 @@ import { connect } from 'react-redux'
 import { fetchFeaturesIfNeeded as getFeatures } from 'actions'
 import HotReloadDemo from 'components/Hot-Reload-Demo'
 
-const pkg = require("json-loader!package.json");
+const pkg = require( "json-loader!package.json" )
 
-console.log('load Home');
+// console.log( 'load Home' )
 
 class Home extends React.Component {
 
@@ -20,17 +20,17 @@ class Home extends React.Component {
   }
 
   componentDidMount () {
-    this.props.getFeatures();
+    this.props.getFeatures()
   }
 
   render () {
-    const { isFetching, features } = this.props;
+    const { isFetching, features } = this.props
 
     return (
       <div className="home">
         <h1>Home</h1>
 
-        <h1 className="project">{pkg.name}</h1>
+        <h1 className="project">{ pkg.name }</h1>
 
         <section className="redux">
           <h1>Redux Async Action</h1>
@@ -39,8 +39,8 @@ class Home extends React.Component {
             {
               isFetching ?
                 <li>Loading...</li>
-              :
-                features.map((feature, i) => (<li key={i}>{feature}</li>))
+                :
+                features.map(( feature, i ) => ( <li key={ i }>{ feature }</li> ))
             }
           </ul>
         </section>
@@ -50,16 +50,16 @@ class Home extends React.Component {
         </HotReloadDemo>
 
       </div>
-    );
+    )
   }
 }
 
 Home = connect(
-    ({ features: { isFetching, features }}) => ({
-      isFetching,
-      features
-    }),
-    { getFeatures }
-  )(Home);
+  ({ features: { isFetching, features }}) => ({
+    isFetching,
+    features
+  }),
+  { getFeatures }
+)( Home )
 
-export default Home;
+export default Home
