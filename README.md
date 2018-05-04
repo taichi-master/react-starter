@@ -1,9 +1,9 @@
-React-Startup Project
+React-Starter Project
 =====================
 
-Most of the React startup projects are either too simple or way too complicated.  If you also feel the same, perhaps you should check out my React startup project.
+Most of the React starter projects are either too simple or way too complicated.  If you also feel the same, perhaps you should check out my React starter project.
 
-The main different from the other React startup projects is the server side.  For some reasons I don't like to use babel-node to run the server. Since it is isomorphic, I use Webpack to compile the JSX when it is needed.
+The main different from the other React starter projects is the server side.  For some reasons I don't like to use babel-node to run the server. Since it is isomorphic, I use Webpack to compile the JSX when it is needed.
 
 I used to use Bootstrap to handle the styles for my applications, but for some reasons I decided not to.  Therefore, I have to created my own NavBar component (it is Font Awesome ready).  Although I didn't include the Bootstrap nor Font Awesome in the project, it is very easy to add those libraries if you ever need them.  My goal is try not to over complicate the project.
 
@@ -24,7 +24,7 @@ The other thing that I would like to point out is I didn't use jQuery in the pro
 
 ## Installation
 ```bash
-git clone https://github.com/taichi-master/react-startup.git <<your new project name>>
+git clone https://github.com/taichi-master/react-starter.git <<your new project name>>
 cd <<your new project name>>
 git remote set-url origin <<your own git repository>>
 ```
