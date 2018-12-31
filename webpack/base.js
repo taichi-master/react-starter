@@ -1,34 +1,42 @@
-const path = require('path');
+const path = require( 'path' )
 
-const pkg = require('../package.json'),
-      webpack = require('webpack'),
-      HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require( 'mini-css-extract-plugin' )
 
-const SOURCE_DIR = path.resolve(__dirname, '../src'),
-      SERVER_DIR = path.resolve(__dirname, '../server'),
-      STYLE_DIR = path.resolve(__dirname, '../style'),
-      TEST_DIR = path.resolve(__dirname, '../test'),
-      DIST_DIR = path.resolve(__dirname, '../dist'),
-      NODE_MODULES_DIR = path.resolve(__dirname, '../node_modules'),
-      PACKAGE_JSON = path.resolve(__dirname, '../package.json'),
-      VIEWS_DIR = path.join(SOURCE_DIR, 'views'),
-      COMPONENTS_DIR = path.join(VIEWS_DIR, 'components'),
-      CONTAINERS_DIR = path.join(SOURCE_DIR, 'containers'),
-      UTILS_DIR = path.join(SOURCE_DIR, 'utils'),
-      MODELS_DIR = path.join(SOURCE_DIR, 'models'),
-      ACTIONS_DIR = path.join(MODELS_DIR, 'actions'),
-      REDUCERS_DIR = path.join(MODELS_DIR, 'reducers');
+// const pkg = require( '../package.json' ),
+//       webpack = require( 'webpack' ),
+//       HtmlWebpackPlugin = require( 'html-webpack-plugin' )
 
-module.exports = {
-  devtool: 'source-map',
+const SOURCE_DIR = path.resolve( __dirname, '../src' ),
+      SERVER_DIR = path.resolve( __dirname, '../server' ),
+      STYLE_DIR = path.resolve( __dirname, '../style' ),
+      TEST_DIR = path.resolve( __dirname, '../test' ),
+      NODE_MODULES_DIR = path.resolve( __dirname, '../node_modules' ),
+      PACKAGE_JSON = path.resolve( __dirname, '../package.json' ),
+      VIEWS_DIR = path.join( SOURCE_DIR, 'views' ),
+      COMPONENTS_DIR = path.join( VIEWS_DIR, 'components' ),
+      MODELS_DIR = path.join( SOURCE_DIR, 'models' )
+
+module.exports = isDev => ({
   context: SOURCE_DIR,
-  entry: {
-    main: './main.js'
+
+  mode: 'none',
+
+  devtool: false,
+
+  resolve: {
+    alias: {
+      'package.json': PACKAGE_JSON,
+      server: SERVER_DIR,
+      style: STYLE_DIR,
+      test: TEST_DIR,
+      node_modules: NODE_MODULES_DIR,
+      src: SOURCE_DIR,
+      models: MODELS_DIR,
+      views: VIEWS_DIR,
+      components: COMPONENTS_DIR
+    }
   },
-  output: {
-    path: DIST_DIR,
-    filename: '[name].js'
-  },
+
   module: {
     rules: [
       {
@@ -43,25 +51,36 @@ module.exports = {
           }
         }
       },
-      {test: /\.(eot|otf|png|svg|ttf|woff|woff2?)(\?.+)?$/, loader: 'url-loader'}
+      {
+        test: /\.(sa|sc|c)ss$/,
+        use: [
+          isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
+          'css-loader',
+          // 'postcss-loader',
+          'sass-loader'
+        ]
+      }
+      // {
+      //   test: /\.json$/,
+      //   loader: 'json-loader'
+      // }      
+      // { test: /\.(eot|otf|png|svg|ttf|woff|woff2?)(\?.+)?$/, loader: 'url-loader' }
     ]
   },
-  resolve: {
-    alias: {
-      'package.json': PACKAGE_JSON,
-      server: SERVER_DIR,
-      style: STYLE_DIR,
-      test: TEST_DIR,
-      node_modules: NODE_MODULES_DIR,
-      utils: UTILS_DIR,
-      models: MODELS_DIR,
-      views: VIEWS_DIR,
-      components: COMPONENTS_DIR,
-      containers: CONTAINERS_DIR,
-      actions: ACTIONS_DIR,
-      reducers: REDUCERS_DIR
+
+  optimization: {
+    runtimeChunk: 'single',
+    splitChunks: {
+      cacheGroups: {
+        commons: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendors',
+          chunks: 'all'
+        }
+      }      
     }
   },
+
   plugins: [
     // new HtmlWebpackPlugin({
     //   inject: false,
@@ -89,4 +108,4 @@ module.exports = {
     //   appMountId: 'app'
     // })
   ]
-};
+})

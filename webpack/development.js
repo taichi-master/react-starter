@@ -1,66 +1,48 @@
-const path = require('path');
+const path = require( 'path' )
 
-const webpack = require('webpack'),
-      webpackMerge = require('webpack-merge');
+const webpack = require( 'webpack' ),
+      webpackMerge = require( 'webpack-merge' ),
+      HtmlWebpackPlugin = require( 'html-webpack-plugin' )
 
-const commonConfig = require('./base.js');
+const distFolder = 'dist'
+const commonConfig = require( './base.js' )( true )
 
-module.exports = function () {
-  const babel = commonConfig.module.rules[0],
-        plugins = babel.use.options.plugins;
-  plugins.push("react-hot-loader/babel");
+module.exports = env => webpackMerge( commonConfig, {
+  mode: 'development',
 
-  commonConfig.plugins.push(
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor',
-      minChunks: function (module) {
-         return module.context && module.context.indexOf('node_modules') !== -1;
+  devtool: 'inline-source-map',
+
+  // entry: [ '@babel/polyfill', './src/main.js' ],
+  entry: {
+    main: [
+      './main.js',
+      '@babel/polyfill', // required by jest
+      'webpack-hot-middleware/client' // required by webpack-hot-middleware
+    ]
+  },
+
+  output: {
+    publicPath: '/'
+  },
+
+  devServer: {
+    contentBase: path.resolve( __dirname, distFolder ),
+    hot: true
+  },
+
+  plugins: [
+    // new HtmlWebpackPlugin({
+    //   title: 'React Sample App',
+    //   inject: false,
+    //   template: require( 'html-webpack-template' ),
+    //   appMountId: 'root'
+    // }),
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.DefinePlugin({
+      'process.env': {
+        BROWSER: JSON.stringify( true ),
+        NODE_ENV: JSON.stringify( 'development' )
       }
     })
-  );
-  commonConfig.plugins.push(
-    new webpack.optimize.CommonsChunkPlugin({
-        name: 'manifest'
-    })
-  );
-
-  return webpackMerge(commonConfig, {
-    devtool: 'inline-source-map',
-    entry: {
-      main: [
-        'react-hot-loader/patch',
-        'webpack-hot-middleware/client',
-        './main.js'
-      ]
-    },
-    output: {
-      publicPath: '/'
-    },
-    module: {
-      rules: [
-        {
-          test: /\.css$/,
-          use: ['style-loader', 'css-loader'] // note: css-loader run first
-        },
-        {
-          test: /\.(sass|scss)$/,
-          use: [
-            'style-loader',
-            'css-loader',
-            'sass-loader',
-          ]
-        }
-      ]
-    },
-    plugins: [
-      new webpack.HotModuleReplacementPlugin(),
-      new webpack.NamedModulesPlugin(),
-      new webpack.DefinePlugin({
-        'process.env': {
-          BROWSER: JSON.stringify(true),
-          NODE_ENV: JSON.stringify('development')
-        }
-      })
-    ]
-  });
-}
+  ]
+})

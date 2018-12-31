@@ -1,107 +1,86 @@
-const fs = require('fs'),
-      path = require('path');
+const path = require( 'path' )
 
-const webpack = require('webpack'),
-      webpackMerge = require('webpack-merge'),
-      CleanWebpackPlugin = require('clean-webpack-plugin'),
-      ExtractTextPlugin = require('extract-text-webpack-plugin'),
-      ManifestPlugin = require('webpack-manifest-plugin');
+const webpack = require( 'webpack' ),
+      webpackMerge = require( 'webpack-merge' ),
+      CleanWebpackPlugin = require( 'clean-webpack-plugin' ),
+      MiniCssExtractPlugin = require( 'mini-css-extract-plugin' ),
+      ManifestPlugin = require( 'webpack-manifest-plugin' )
 
-const commonConfig = require('./base.js');
+const commonConfig = require( './base.js' )( false )
 
-const LIBS_DIR = path.resolve(__dirname, '../server/libs');
+const DIST_DIR = path.resolve( __dirname, '../dist' ),
+      LIBS_DIR = path.resolve( __dirname, '../server/libs' )
 
-module.exports = function (env) {
-  const isChunkHash = env && env.chunkhash;
+module.exports = ( env ) => {
+  const isBuild = env && env.build || false,
+        isDist = env && env.dist || false
 
-  const web_config = webpackMerge(commonConfig, {
-    module: {
-      rules: [
-        {
-          test: /\.css$/,
-          use: ExtractTextPlugin.extract({
-            use: 'css-loader'
-          })
-        },
-        {
-          test: /\.(sass|scss)$/,
-          use: ExtractTextPlugin.extract({
-            use: ['css-loader', 'sass-loader']
-          })
-        }
-      ]
+  const web_config = webpackMerge( commonConfig, {
+    mode: isDist ? 'production' : 'none',
+
+    devtool: isBuild ? 'source-map' : false,
+
+    entry: {
+      main: './main.js'
     },
+  
+    output: {
+      path: DIST_DIR,
+      filename: isDist ? '[name].[contenthash].js' : '[name].js'
+    },
+
     plugins: [
-      new CleanWebpackPlugin([commonConfig.output.path]),
-      new webpack.optimize.CommonsChunkPlugin({
-        name: 'vendor',
-        minChunks: function (module) {
-          // This prevents stylesheet resources with the .css or .scss extension
-          // from being moved from their original chunk to the vendor chunk
-          if(module.resource && (/^.*\.(css|scss)$/).test(module.resource)) {
-            return false;
-          }
-          return module.context && module.context.indexOf("node_modules") !== -1;
-        }
+      new CleanWebpackPlugin([ DIST_DIR, LIBS_DIR ], {
+        root: path.resolve( __dirname, '..' )
       }),
-      new webpack.optimize.CommonsChunkPlugin({
-          name: 'manifest'
-      }),
-      new ExtractTextPlugin(isChunkHash ? 'main.[chunkhash].css' : 'main.css'),
+      new MiniCssExtractPlugin( isDist ? 'main.[contenthash].css' : 'main.css' ),
       new ManifestPlugin(),
       new webpack.DefinePlugin({
         'process.env': {
-          BROWSER: JSON.stringify(true),
-          NODE_ENV: JSON.stringify('production')
+          BROWSER: JSON.stringify( true ),
+          NODE_ENV: JSON.stringify( 'production' )
         }
       })
     ]
-  });
+  })
 
-  if (isChunkHash) {
-    web_config.devtool = 'cheap-module-source-map';
-    web_config.output.filename = '[name].[chunkhash].js';
-  }
+  const node_config = webpackMerge( commonConfig, {
+    mode: isDist ? 'production' : 'development',
 
-  const node_config = {
-    // target: 'node',
-    target: 'async-node',
-    devtool: 'eval',
+    target: 'node',
+
+    devtool: 'none',
+
     entry: {
-      App: './views/components/App.js',
-      utils: './utils',
+      App: './views/components/app',
       reducers: './models/reducers'
     },
+
     output: {
       path: LIBS_DIR,
       filename: '[name].js',
-      libraryTarget: 'commonjs'
+      libraryTarget: 'commonjs2'
     },
+
+    externals: /^[a-z\-0-9]+$/,
+
+    optimization: {
+      runtimeChunk: false
+    },
+
     plugins: [
-      new CleanWebpackPlugin([LIBS_DIR]),
-      new ExtractTextPlugin({
+      new MiniCssExtractPlugin({
         filename: 'dummy.css',
         allChunks: true
       }),
       new webpack.DefinePlugin({
         'process.env': {
-          BROWSER: JSON.stringify(false),
-          NODE_ENV: JSON.stringify('production')
+          BROWSER: JSON.stringify( false ),
+          NODE_ENV: JSON.stringify( 'production' )
         }
       })
-    ],
-    // externals: [
-    //   {
-    //     'isomorphic-fetch': {
-    //       root: 'isomorphic-fetch',
-    //       commonjs2: 'isomorphic-fetch',
-    //       commonjs: 'isomorphic-fetch',
-    //       amd: 'isomorphic-fetch'
-    //     }
-    //   }
-    // ]
-  };
-  node_config.__proto__ = web_config;
+    ]
+  })
 
-  return [web_config, node_config];
+  return [ web_config, node_config ]
 }

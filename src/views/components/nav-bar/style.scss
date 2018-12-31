@@ -1,0 +1,12 @@
+.nav-bar {
+  text-align: left;
+  margin-bottom: 2em;
+
+  > a {
+    text-decoration: underline;
+
+    + a {
+      padding-left: 1em;
+    }
+  }
+}

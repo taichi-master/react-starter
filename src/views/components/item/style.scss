@@ -1,0 +1,15 @@
+.item {
+  // list-style-type: disc;
+  font-size: 2em;
+  width: 200px;
+  margin: 0 auto;
+
+  &:nth-child(odd) {
+    background: #b8d1f3;
+  }
+
+  &:nth-child(even) {
+    background: #dae5f4;
+  }
+}
+

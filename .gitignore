@@ -41,8 +41,4 @@ assets/bower_components
 .DS_Store
 *.map
 yarn.lock
-<<<<<<< HEAD
 package-lock.json
-=======
-package-lock.json
->>>>>>> d1bfcbf95c98b9304f011151427fff07191a635d

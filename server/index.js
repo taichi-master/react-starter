@@ -8,23 +8,24 @@ var server
 
 if ( port !== '3000' && process.env.NODE_ENV === 'production' ) {
   try {
-    const path = require( 'path' )
+    const fs = require( 'fs' ),
+          path = require( 'path' )
 
     certificate = fs.readFileSync( path.resolve( __dirname, '../ssl/fullchain.pem' ), 'utf8' ),
     privateKey = fs.readFileSync( path.resolve( __dirname, '../ssl/privkey.pem' ), 'utf8' ),
     credentials = { key: privateKey, cert: certificate }
     server = require( 'https' ).createServer( credentials, app )
-    console.log( 'Https' )  // eslint-disable-line
+    console.warn( 'Https' )
   } catch ( err ) {
-    console.error( err )  // eslint-disable-line
-    console.error( 'Running http without SSL' ) // eslint-disable-line
+    console.error( err )
+    console.error( 'Running http without SSL' )
     server = require( 'http' ).createServer( app )
   }
 } else
   server = require( 'http' ).createServer( app )
 
 server.on( 'listening', () => {
-  console.log( 'Listening on port', port )  // eslint-disable-line
+  console.warn( 'Listening on port', port )
 })
 
 server.on( 'error', ( error ) => {
@@ -33,11 +34,11 @@ server.on( 'error', ( error ) => {
 
   switch ( error.code ) {
   case 'EACCES':
-    console.error( `Port ${port} requires elevated privileges` )  // eslint-disable-line
+    console.error( `Port ${port} requires elevated privileges` )
     process.exit( 1 )
     break
   case 'EADDRINUSE':
-    console.error( `Port ${port} is already in use` ) // eslint-disable-line
+    console.error( `Port ${port} is already in use` )
     process.exit( 1 )
     break
   default:

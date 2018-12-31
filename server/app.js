@@ -9,23 +9,24 @@ const express = require( 'express' ),
 
 const pkg = require( '../package.json' ),
       dist = {
-        'main.css': 'main.css',
-        'manifest.js': 'manifest.js',
-        'vendor.js': 'vendor.js',
-        'main.js': 'main.js'
+        'vendors.js': 'vendors.js',
+        'runtime.js': 'runtime.js',
+        'main.js': 'main.js',
+        'main.css': 'main.css'
       },
-      isDev = process.env.NODE_ENV !== 'production'
+      isDev = process.env.NODE_ENV === 'development'
 
 // React and Redux.
 const React = require( 'react' ),
       ReactDOMServer = require( 'react-dom/server' ),
-      { StaticRouter } = require( 'react-router' )
+      { StaticRouter } = require( 'react-router' ),
 
-App = isDev ? null : require( './libs/App' ).default,
-{ createStore, applyMiddleware } = require( 'redux' ), // server side redux
-thunkMiddleware = require( 'redux-thunk' ).default,
-{ Provider } = require( 'react-redux' ),
-store = isDev ? null : createStore( require( './libs/reducers' ).default, pkg.cfg.initialState, applyMiddleware( thunkMiddleware ))
+      App = isDev ? null : require( './libs/App' ).default,
+      { createStore, applyMiddleware } = require( 'redux' ), // server side redux
+      { Provider } = require( 'react-redux' ),
+      // thunkMiddleware = require( 'redux-thunk' ).default,
+      // store = isDev ? null : createStore( require( './libs/reducers' ).default, pkg.cfg.initialState, applyMiddleware( thunkMiddleware ))
+      store = isDev ? null : createStore( require( './libs/reducers' ).default, pkg.cfg.initialState )
 
 function createPage ( pkg, style, initialState, appHtml ) {
   return `
@@ -42,14 +43,16 @@ function createPage ( pkg, style, initialState, appHtml ) {
         <script>window.__INITIAL_STATE__ = ${JSON.stringify( initialState )};</script>
       </head>
       <body>
-        <div id="app">${appHtml}</div>
-        <script src="/${dist['manifest.js']}"></script>
-        <script src="/${dist['vendor.js']}"></script>
+        <div id="root">${appHtml}</div>
+        <script src="/${dist['vendors.js']}"></script>
+        <script src="/${dist['runtime.js']}"></script>
         <script src="/${dist['main.js']}"></script>
       </body>
     </html>
   `
 }
+
+// {/* <script src="/${dist['manifest.js']}"></script> */}
 
 function setRoutes ( app ) {
   app.use( compression())
@@ -61,12 +64,13 @@ function setRoutes ( app ) {
   app.use( logger( 'dev' ))
 
   // REST API
-  app.use( '/api/features', require( './api/features' ))
+  // app.use( '/api/features', require( './api/features' ))
   app.enable( 'trust proxy' )
 
   // main
   app.get( '*', function ( req, res ) {
     const context = {}
+    // const appHtml = '<h1>Loading...</h1>'
     const appHtml = isDev ? '<h1>Loading...</h1>' : ReactDOMServer.renderToString(
       React.createElement( Provider, { store },
         React.createElement( StaticRouter, { location:req.url, context },
@@ -103,13 +107,13 @@ if ( isDev ) {
     }))
 
     app.use( webpackHotMiddleware( compiler, {
-      log: console.log  // eslint-disable-line
+      log: console.warn
     }))
 
     setRoutes( app )
 
   } catch ( err ) {
-    console.error( err )  // eslint-disable-line
+    console.error( err )
   }
 } else {
   const manifest = require( '../dist/manifest.json' )
@@ -121,7 +125,7 @@ if ( isDev ) {
 if ( module == require.main ) {
   const port = process.env.PORT || '3000'
 
-  app.listen( port, () => console.log( 'Listening on port', port )) // eslint-disable-line
+  app.listen( port, () => console.warn( 'Listening on port', port ))
 }
 else
   module.exports = app

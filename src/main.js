@@ -1,37 +1,22 @@
-import 'style/main.scss'
+import './style.css'
 
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { AppContainer } from 'react-hot-loader'
-import { BrowserRouter } from 'react-router-dom'
-import { createStore, applyMiddleware } from 'redux'
-import thunkMiddleware from 'redux-thunk'
 import { Provider } from 'react-redux'
+import { BrowserRouter } from 'react-router-dom'
 
-import App from 'components/App'
+import App from 'components/app'
+import store from './configureStore'
 
-import reducers from 'reducers'
+ReactDOM.render(
+  <Provider store={ store }>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </Provider>,
+  document.getElementById( 'root' )
+)
 
-const store = createStore( reducers, window.__INITIAL_STATE__, applyMiddleware( thunkMiddleware ))
-
-const render = ( Component ) => {
-  ReactDOM.render(
-    <AppContainer>
-      <Provider store={ store }>
-        <BrowserRouter>
-          <Component />
-        </BrowserRouter>
-      </Provider>
-    </AppContainer>,
-    document.getElementById( 'app' )
-  )
-}
-
-render( App )
-
-// Hot Module Replacement API
-if ( module.hot ) {
-  module.hot.accept( 'components/App', () => {
-    render( App )
-  })
-}
+// if ( module.hot ) {
+//   module.hot.accept()
+// }
