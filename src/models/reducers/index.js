@@ -2,6 +2,6 @@ import { combineReducers } from 'redux'
 
 import year from './year'
 
-export default combineReducers({
+export default combineReducers( {
   year
-})
+} )

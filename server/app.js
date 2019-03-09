@@ -22,7 +22,8 @@ const React = require( 'react' ),
       { StaticRouter } = require( 'react-router' ),
 
       App = isDev ? null : require( './libs/App' ).default,
-      { createStore, applyMiddleware } = require( 'redux' ), // server side redux
+      // { createStore, applyMiddleware } = require( 'redux' ), // server side redux
+      { createStore } = require( 'redux' ), // server side redux
       { Provider } = require( 'react-redux' ),
       // thunkMiddleware = require( 'redux-thunk' ).default,
       // store = isDev ? null : createStore( require( './libs/reducers' ).default, pkg.cfg.initialState, applyMiddleware( thunkMiddleware ))
@@ -55,13 +56,13 @@ function createPage ( pkg, style, initialState, appHtml ) {
 // {/* <script src="/${dist['manifest.js']}"></script> */}
 
 function setRoutes ( app ) {
-  app.use( compression())
-  app.use( favicon( path.resolve( __dirname, '../assets', 'favicon.ico' )))
-  app.use( '/', express.static( path.resolve( __dirname, '../assets' )))
-  app.use( '/', express.static( path.resolve( __dirname, '../dist' )))
-  app.use( bodyParser.json())
-  app.use( bodyParser.urlencoded({ extended: false }))
-  app.use( logger( 'dev' ))
+  app.use( compression() )
+  app.use( favicon( path.resolve( __dirname, '../assets', 'favicon.ico' ) ) )
+  app.use( '/', express.static( path.resolve( __dirname, '../assets' ) ) )
+  app.use( '/', express.static( path.resolve( __dirname, '../dist' ) ) )
+  app.use( bodyParser.json() )
+  app.use( bodyParser.urlencoded( { extended: false } ) )
+  app.use( logger( 'dev' ) )
 
   // REST API
   // app.use( '/api/features', require( './api/features' ))
@@ -82,12 +83,12 @@ function setRoutes ( app ) {
     if ( context.url ) {
       res.writeHead( 301, {
         Location: context.url
-      })
+      } )
       res.end()
     } else {
-      res.send( createPage( pkg, isDev ? '' : `<link rel="stylesheet" href="/${dist['main.css']}" />`, pkg.cfg.initialState, appHtml ))
+      res.send( createPage( pkg, isDev ? '' : `<link rel="stylesheet" href="/${dist['main.css']}" />`, pkg.cfg.initialState, appHtml ) )
     }
-  })
+  } )
 }
 
 if ( isDev ) {
@@ -104,11 +105,11 @@ if ( isDev ) {
       publicPath: config.output.publicPath,
       logLevel: 'warn',
       stats: { colors: true }
-    }))
+    } ) )
 
     app.use( webpackHotMiddleware( compiler, {
       log: console.warn
-    }))
+    } ) )
 
     setRoutes( app )
 
@@ -118,14 +119,14 @@ if ( isDev ) {
 } else {
   const manifest = require( '../dist/manifest.json' )
 
-  Object.keys( dist ).forEach( k => dist[k] = manifest[k])
+  Object.keys( dist ).forEach( k => dist[k] = manifest[k] )
   setRoutes( app )
 }
 
 if ( module == require.main ) {
   const port = process.env.PORT || '3000'
 
-  app.listen( port, () => console.warn( 'Listening on port', port ))
+  app.listen( port, () => console.warn( 'Listening on port', port ) )
 }
 else
   module.exports = app

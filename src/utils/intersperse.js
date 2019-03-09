@@ -10,8 +10,8 @@ function intersperse ( arr, sep ) {
   }
 
   return arr.slice( 1 ).reduce( function ( sb, x, i ) {
-    return sb.concat([ sep, x ])
-  }, [arr[0]])
+    return sb.concat( [ sep, x ] )
+  }, [arr[0]] )
 }
 
 module.exports = intersperse.default = intersperse.intersperse = intersperse

@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { setYear } from 'models/actions'
 
-@connect( null, { setYear })
+@connect( null, { setYear } )
 export default class Item extends React.Component {
 
   static propTypes = {

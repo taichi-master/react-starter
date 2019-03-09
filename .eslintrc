@@ -17,7 +17,7 @@
     "no-multi-spaces": "error",
     "space-infix-ops": ["error", {"int32Hint": false}],
     "space-before-function-paren": ["error", "always"],
-    "space-in-parens": ["error", "always", { "exceptions": ["()", "[]", "{}"] }],
+    "space-in-parens": ["error", "always"],
     "array-bracket-spacing": ["error", "always", { "singleValue": false, "objectsInArrays": false, "arraysInArrays": false }],
     "object-curly-spacing": ["error", "always", { "objectsInObjects": false, "arraysInObjects": false }],
     "keyword-spacing": ["error", { "after": true }],
@@ -35,7 +35,7 @@
     "react/react-in-jsx-scope": "error",
     "react/jsx-uses-react": "error",
     "react/jsx-uses-vars": "error",
-    "react/jsx-space-before-closing": ["error", "always"],
+    "react/jsx-tag-spacing": ["error", {"beforeSelfClosing": "always"}],
     "react/jsx-max-depth": ["error", { "max": 9 }],
     "react/jsx-curly-spacing": ["error", {"when": "always", "attributes": true, "children": true, "allowMultiline": true, "spacing": {"objectLiterals": "always"}}]
   },

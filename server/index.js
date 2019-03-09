@@ -26,7 +26,7 @@ if ( port !== '3000' && process.env.NODE_ENV === 'production' ) {
 
 server.on( 'listening', () => {
   console.warn( 'Listening on port', port )
-})
+} )
 
 server.on( 'error', ( error ) => {
   if ( error.syscall !== 'listen' )
@@ -44,7 +44,7 @@ server.on( 'error', ( error ) => {
   default:
     throw error
   }
-})
+} )
 
 if ( module == require.main ) {
   server.listen( port )

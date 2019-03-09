@@ -10,13 +10,13 @@ import Loading from 'components/loading'
 import Home from 'views/Home'
 import NoMatch from 'views/404'
 
-const About = Loadable({
+const About = Loadable( {
   loader: () => import( 'views/About' ),
   loading: Loading
-})
+} )
 
 if ( module.hot )
-  setConfig({ logLevel: 'no-errors-please' })
+  setConfig( { logLevel: 'no-errors-please' } )
 
 const App = () => (
   <>

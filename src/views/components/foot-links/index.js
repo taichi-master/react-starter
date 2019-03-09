@@ -10,7 +10,7 @@ export default () => (
   <div className="foot-links">
     {
       intersperse(
-        footLinks.map(( x, i ) => ( <Link to={ x.url } key={ i }>{ x.name }</Link> )),
+        footLinks.map( ( x, i ) => ( <Link to={ x.url } key={ i }>{ x.name }</Link> ) ),
         ' | '
       )
     }

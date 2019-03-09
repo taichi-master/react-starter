@@ -11,9 +11,9 @@ const pkg = require( "package.json" )
 // console.log( 'load Home' )
 
 @connect(
-  ({ year }) => ({
+  ( { year } ) => ( {
     year
-  })
+  } )
 )
 export default class Home extends React.Component {
 
@@ -34,7 +34,7 @@ export default class Home extends React.Component {
         <Counter style={ { margin: "1em 0" } } />
         <List title={ `Selected Year ${year}` }>
           {
-            _.range( defaultYear, defaultYear - 5 ).map(( x, i ) => <Item key={ i }>{ x }</Item> )
+            _.range( defaultYear, defaultYear - 5 ).map( ( x, i ) => <Item key={ i }>{ x }</Item> )
           }
         </List>
 
