@@ -1,8 +1,8 @@
 const path = require( 'path' )
 
 const webpack = require( 'webpack' ),
-      webpackMerge = require( 'webpack-merge' ),
-      HtmlWebpackPlugin = require( 'html-webpack-plugin' )
+      webpackMerge = require( 'webpack-merge' )
+      // HtmlWebpackPlugin = require( 'html-webpack-plugin' )
 
 const distFolder = 'dist'
 const commonConfig = require( './base.js' )( true )
@@ -38,11 +38,11 @@ module.exports = env => webpackMerge( commonConfig, {
     //   appMountId: 'root'
     // }),
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.DefinePlugin({
+    new webpack.DefinePlugin( {
       'process.env': {
         BROWSER: JSON.stringify( true ),
         NODE_ENV: JSON.stringify( 'development' )
       }
-    })
+    } )
   ]
-})
+} )

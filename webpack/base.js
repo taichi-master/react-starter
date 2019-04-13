@@ -16,7 +16,16 @@ const SOURCE_DIR = path.resolve( __dirname, '../src' ),
       COMPONENTS_DIR = path.join( VIEWS_DIR, 'components' ),
       MODELS_DIR = path.join( SOURCE_DIR, 'models' )
 
-module.exports = isDev => ({
+const babel = {
+  loader: 'babel-loader',
+  options: {
+    plugins: [
+      // "syntax-dynamic-import"
+    ]
+  }
+}
+
+module.exports = isDev => ( {
   context: SOURCE_DIR,
 
   mode: 'none',
@@ -26,6 +35,7 @@ module.exports = isDev => ({
   resolve: {
     alias: {
       'package.json': PACKAGE_JSON,
+      'react-dom': isDev ? '@hot-loader/react-dom' : 'react-dom',
       server: SERVER_DIR,
       style: STYLE_DIR,
       test: TEST_DIR,
@@ -42,14 +52,7 @@ module.exports = isDev => ({
       {
         test: /\.jsx?$/,
         exclude: [/node_modules/],
-        use: {
-          loader: 'babel-loader',
-          options: {
-            plugins: [
-              // "syntax-dynamic-import"
-            ]
-          }
-        }
+        use: isDev ? [ babel, 'react-hot-loader/webpack' ] : babel
       },
       {
         test: /\.(sa|sc|c)ss$/,
@@ -108,4 +111,4 @@ module.exports = isDev => ({
     //   appMountId: 'app'
     // })
   ]
-})
+} )

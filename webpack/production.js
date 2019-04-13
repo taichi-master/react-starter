@@ -30,19 +30,17 @@ module.exports = ( env ) => {
     },
 
     plugins: [
-      new CleanWebpackPlugin([ DIST_DIR, LIBS_DIR ], {
-        root: path.resolve( __dirname, '..' )
-      }),
+      new CleanWebpackPlugin( { cleanOnceBeforeBuildPatterns: [ DIST_DIR, LIBS_DIR ]} ),
       new MiniCssExtractPlugin( isDist ? 'main.[contenthash].css' : 'main.css' ),
       new ManifestPlugin(),
-      new webpack.DefinePlugin({
+      new webpack.DefinePlugin( {
         'process.env': {
           BROWSER: JSON.stringify( true ),
           NODE_ENV: JSON.stringify( 'production' )
         }
-      })
+      } )
     ]
-  })
+  } )
 
   const node_config = webpackMerge( commonConfig, {
     mode: isDist ? 'production' : 'development',
@@ -69,18 +67,18 @@ module.exports = ( env ) => {
     },
 
     plugins: [
-      new MiniCssExtractPlugin({
+      new MiniCssExtractPlugin( {
         filename: 'dummy.css',
         allChunks: true
-      }),
-      new webpack.DefinePlugin({
+      } ),
+      new webpack.DefinePlugin( {
         'process.env': {
           BROWSER: JSON.stringify( false ),
           NODE_ENV: JSON.stringify( 'production' )
         }
-      })
+      } )
     ]
-  })
+  } )
 
   return [ web_config, node_config ]
 }

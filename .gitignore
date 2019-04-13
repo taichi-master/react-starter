@@ -40,5 +40,3 @@ assets/bower_components
 .idea
 .DS_Store
 *.map
-yarn.lock
-package-lock.json
