@@ -6,7 +6,7 @@
   "rules": {
     "no-alert": "error",
     "no-debugger": "error",
-    "no-console": ["error", {"allow": ["warn", "error"]}],
+    "no-console": ["error", {"allow": ["info", "warn", "error"]}],
     "linebreak-style": [2, "unix"],
     "semi": ["error", "never"],
     "indent": ["error", 2, { "VariableDeclarator": { "var": 2, "let": 2, "const": 3 } }],

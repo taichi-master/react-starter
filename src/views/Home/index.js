@@ -6,6 +6,8 @@ import Item from 'components/item'
 import Counter from 'components/counter'
 import _ from 'lodash'
 
+import { getPostsByUser, getCommentsByPost } from 'models/actions'
+
 const pkg = require( "package.json" )
 
 // console.log( 'load Home' )
@@ -13,13 +15,22 @@ const pkg = require( "package.json" )
 @connect(
   ( { year } ) => ( {
     year
-  } )
+  } ),
+  { getPostsByUser, getCommentsByPost }
 )
 export default class Home extends React.Component {
 
   state = {
     year: this.props.year
   }
+
+  // componentDidMount () {
+  //   const userId = 1,
+  //         postId = 1
+
+  //   this.props.getPostsByUser( userId )
+  //   this.props.getCommentsByPost( postId )
+  // }
 
   render () {
     const { year } = this.props,
