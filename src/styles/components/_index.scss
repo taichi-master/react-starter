@@ -1,5 +1,7 @@
-@import 'App.scss';
-@import 'home.scss';
-@import 'about.scss';
-@import 'Hot-Reload-Demo.scss';
-@import 'NavBar.scss';
+/* components */
+@import 'components/app/style.scss';
+@import 'components/nav-bar/style.scss';
+@import 'components/counter/style.scss';
+@import 'components/list/style.scss';
+@import 'components/item/style.scss';
+@import 'components/foot-links/style.scss';

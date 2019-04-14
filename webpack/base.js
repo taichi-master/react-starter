@@ -8,7 +8,7 @@ const MiniCssExtractPlugin = require( 'mini-css-extract-plugin' )
 
 const SOURCE_DIR = path.resolve( __dirname, '../src' ),
       SERVER_DIR = path.resolve( __dirname, '../server' ),
-      STYLE_DIR = path.resolve( __dirname, '../style' ),
+      STYLES_DIR = path.join( SOURCE_DIR, 'styles' ),
       TEST_DIR = path.resolve( __dirname, '../test' ),
       NODE_MODULES_DIR = path.resolve( __dirname, '../node_modules' ),
       PACKAGE_JSON = path.resolve( __dirname, '../package.json' ),
@@ -37,7 +37,7 @@ module.exports = isDev => ( {
       'package.json': PACKAGE_JSON,
       'react-dom': isDev ? '@hot-loader/react-dom' : 'react-dom',
       server: SERVER_DIR,
-      style: STYLE_DIR,
+      styles: STYLES_DIR,
       test: TEST_DIR,
       node_modules: NODE_MODULES_DIR,
       src: SOURCE_DIR,
@@ -59,7 +59,6 @@ module.exports = isDev => ( {
         use: [
           isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
           'css-loader',
-          // 'postcss-loader',
           'sass-loader'
         ]
       }

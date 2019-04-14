@@ -1,6 +1,10 @@
 #root {
-  width: 500px;
   margin: 1em auto;
+  width: $mobile-width;
+
+  @include atMedium {
+    width: $desktop-width;
+  }
 
   .counter {
     margin: 1em auto;

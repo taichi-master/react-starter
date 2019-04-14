@@ -1,36 +1,11 @@
-@import '../settings/button';
-
 .btn {
   cursor: pointer;
-  display: inline-block;
+  background: $laConfidential;
+  color: $nycDiesel;
+  padding: .1em .25em;
 
-  min-height: 1em;
-
-  outline: none;
-  border: none;
-  // vertical-align: $verticalAlign;
-  // background: $background;
-  // color: $textColor;
-  //
-  // font-family: $fontFamily;
-
-  // margin: 0em $horizontalMargin $verticalMargin 0em;
-  // padding: $verticalPadding $horizontalPadding ($verticalPadding + $shadowOffset);
-
-  // text-transform: $textTransform;
-  // text-shadow: $textShadow;
-  // font-weight: $fontWeight;
-  // line-height: $lineHeight;
-  font-style: normal;
-  text-align: center;
-  text-decoration: none;
-
-  // border-radius: $borderRadius;
-  box-shadow: $boxShadow;
-
-  user-select: none;
-  // transition: $transition;
-  // will-change: $willChange;
-
-  // -webkit-tap-highlight-color: $tapColor;
+  &--danger {
+    background: $danger;
+    color: $whiteWidow
+  }
 }

@@ -4,6 +4,8 @@ const webpack = require( 'webpack' ),
       webpackMerge = require( 'webpack-merge' ),
       CleanWebpackPlugin = require( 'clean-webpack-plugin' ),
       MiniCssExtractPlugin = require( 'mini-css-extract-plugin' ),
+      TerserJSPlugin = require( 'terser-webpack-plugin' ),
+      OptimizeCSSAssetsPlugin = require( 'optimize-css-assets-webpack-plugin' ),
       ManifestPlugin = require( 'webpack-manifest-plugin' )
 
 const commonConfig = require( './base.js' )( false )
@@ -29,9 +31,13 @@ module.exports = ( env ) => {
       filename: isDist ? '[name].[contenthash].js' : '[name].js'
     },
 
+    optimization: {
+      minimizer: isDist ? [ new TerserJSPlugin( {} ), new OptimizeCSSAssetsPlugin( {} ) ] : []
+    },
+
     plugins: [
-      new CleanWebpackPlugin( { cleanOnceBeforeBuildPatterns: [ DIST_DIR, LIBS_DIR ]} ),
-      new MiniCssExtractPlugin( isDist ? 'main.[contenthash].css' : 'main.css' ),
+      new CleanWebpackPlugin( { cleanOnceBeforeBuildPatterns: [ DIST_DIR, LIBS_DIR ] } ),
+      new MiniCssExtractPlugin( { filename: isDist ? '[name].[contenthash].css' : '[name].css' } ),
       new ManifestPlugin(),
       new webpack.DefinePlugin( {
         'process.env': {
