@@ -86,5 +86,7 @@ module.exports = ( env ) => {
     ]
   } )
 
+  delete node_config.optimization.splitChunks // needs to remove this from the base settings
+
   return [ web_config, node_config ]
 }

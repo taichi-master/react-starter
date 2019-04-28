@@ -51,7 +51,7 @@ module.exports = isDev => ( {
     rules: [
       {
         test: /\.jsx?$/,
-        exclude: [/node_modules/],
+        exclude: [ /node_modules/ ],
         use: isDev ? [ babel, 'react-hot-loader/webpack' ] : babel
       },
       {
