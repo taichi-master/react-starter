@@ -6,6 +6,8 @@ import NavBar from 'components/nav-bar'
 import FootLinks from 'components/foot-links'
 import Loading from 'components/loading'
 import Home from 'views/Home'
+import Hooks from 'views/Hooks'
+import Lifecycle from 'views/Lifecycle'
 import NoMatch from 'views/404'
 
 const About = Loadable( {
@@ -24,6 +26,8 @@ const App = () => (
     <article className="main-content">
       <Switch>
         <Route path="/" exact component={ Home } />
+        <Route path="/hooks" component={ Hooks } />
+        <Route path="/lifecycle" component={ Lifecycle } />
         <Route path="/about" component={ About } />
         <Route component={ NoMatch } />
       </Switch>
