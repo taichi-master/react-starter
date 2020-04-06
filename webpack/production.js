@@ -2,7 +2,7 @@ const path = require( 'path' )
 
 const webpack = require( 'webpack' ),
       webpackMerge = require( 'webpack-merge' ),
-      CleanWebpackPlugin = require( 'clean-webpack-plugin' ),
+      { CleanWebpackPlugin } = require( 'clean-webpack-plugin' ),
       MiniCssExtractPlugin = require( 'mini-css-extract-plugin' ),
       TerserJSPlugin = require( 'terser-webpack-plugin' ),
       OptimizeCSSAssetsPlugin = require( 'optimize-css-assets-webpack-plugin' ),
