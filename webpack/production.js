@@ -88,5 +88,7 @@ module.exports = ( env ) => {
 
   delete node_config.optimization.splitChunks // needs to remove this from the base settings
 
-  return [ web_config, node_config ]
+  return env && env.node ? node_config : web_config
+  // webpack multi-target doesn't work.  Can't generate the node portion.
+  // return [node_config, web_config]
 }
