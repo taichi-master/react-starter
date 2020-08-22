@@ -10,7 +10,7 @@
     "linebreak-style": [2, "unix"],
     "semi": ["error", "never"],
     "indent": ["error", 2, { "VariableDeclarator": { "var": 2, "let": 2, "const": 3 } }],
-    "id-length": [2, {"min": 3, "properties": "never", "exceptions": ["a", "b", "c", "e", "i", "j", "k", "n", "r", "x", "y", "z", "_", "cb", "cx", "el", "fs", "id", "ul", "li", "sb"]}],
+    "id-length": [2, {"min": 3, "properties": "never", "exceptions": ["a", "b", "c", "e", "i", "j", "k", "n", "r", "x", "y", "z", "_", "cb", "cx", "el", "fs", "id", "ul", "li", "sb", "db"]}],
     "arrow-parens": ["error", "as-needed", { "requireForBlockBody": true }],
     "arrow-body-style": ["error", "as-needed", { "requireReturnForObjectLiteral": false }],
     "newline-after-var": ["error", "always"],
