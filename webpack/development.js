@@ -1,13 +1,13 @@
 const path = require( 'path' )
 
 const webpack = require( 'webpack' ),
-      webpackMerge = require( 'webpack-merge' )
+      { merge } = require( 'webpack-merge' )
       // HtmlWebpackPlugin = require( 'html-webpack-plugin' )
 
 const distFolder = 'dist'
 const commonConfig = require( './base.js' )( true )
 
-module.exports = env => webpackMerge( commonConfig, {
+module.exports = env => merge( commonConfig, {
   mode: 'development',
 
   devtool: 'inline-source-map',

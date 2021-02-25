@@ -103,7 +103,6 @@ if ( isDev ) {
 
     app.use( webpackDevMiddleware( compiler, {
       publicPath: config.output.publicPath,
-      logLevel: 'warn',
       stats: { colors: true }
     } ) )
 

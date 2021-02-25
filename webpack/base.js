@@ -32,6 +32,10 @@ module.exports = isDev => ( {
 
   devtool: false,
 
+  stats: {
+    children: true
+  },
+
   resolve: {
     alias: {
       'package.json': PACKAGE_JSON,
