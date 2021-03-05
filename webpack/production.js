@@ -6,6 +6,7 @@ const webpack = require( 'webpack' ),
       MiniCssExtractPlugin = require( 'mini-css-extract-plugin' ),
       TerserPlugin = require( 'terser-webpack-plugin' ),
       CssMinimizerPlugin = require( 'css-minimizer-webpack-plugin' ),
+      LodashModuleReplacementPlugin = require( 'lodash-webpack-plugin' ),
       { WebpackManifestPlugin } = require( 'webpack-manifest-plugin' )
 
 const commonConfig = require( './base.js' )( false )
@@ -26,6 +27,11 @@ module.exports = ( env ) => {
 
     entry: {
       main: './main.js'
+    },
+    
+    performance: {
+      maxEntrypointSize: 400000,
+      maxAssetSize: 320000
     },
   
     output: {
@@ -77,6 +83,7 @@ module.exports = ( env ) => {
     },
 
     plugins: [
+      new LodashModuleReplacementPlugin(),
       new CleanWebpackPlugin( { cleanOnceBeforeBuildPatterns: [ LIBS_DIR ] } ),
       new MiniCssExtractPlugin( {
         filename: 'dummy.css'
