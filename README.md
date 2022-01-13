@@ -7,8 +7,8 @@ The main different from the other React starter projects is the server side.  Fo
 
 ## Features:
 - React 16 (Fiber) Isomorphic (universal) Single Page Application
-- ES6 Javascript
-- Webpack 4.xx + Express (https)
+- ESnext Javascript
+- Webpack 5.xx + Express (https)
 - React Router 4 (dynamic component)
 - Lazy load components
 - Hot reload across browsers in multiple devices at the same time

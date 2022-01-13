@@ -19,7 +19,7 @@ const pkg = require( '../package.json' ),
 // React and Redux.
 const React = require( 'react' ),
       ReactDOMServer = require( 'react-dom/server' ),
-      { StaticRouter } = require( 'react-router' ),
+      { StaticRouter } = require( 'react-router-dom/server' ),
 
       App = isDev ? null : require( './libs/App' ).default,
       // { createStore, applyMiddleware } = require( 'redux' ), // server side redux
@@ -71,6 +71,7 @@ function setRoutes ( app ) {
   // main
   app.get( '*', function ( req, res ) {
     const context = {}
+
     // const appHtml = '<h1>Loading...</h1>'
     const appHtml = isDev ? '<h1>Loading...</h1>' : ReactDOMServer.renderToString(
       React.createElement( Provider, { store },
@@ -96,10 +97,9 @@ if ( isDev ) {
     // Hot reload
     const webpack = require( 'webpack' ),
           webpackDevMiddleware = require( 'webpack-dev-middleware' ),
-          webpackHotMiddleware = require( 'webpack-hot-middleware' )
-
-    config = require( '../webpack/development.js' )()
-    compiler = webpack( config )
+          webpackHotMiddleware = require( 'webpack-hot-middleware' ),
+          config = require( '../webpack/development.js' )(),
+          compiler = webpack( config )
 
     app.use( webpackDevMiddleware( compiler, {
       publicPath: config.output.publicPath,

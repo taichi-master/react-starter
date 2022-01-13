@@ -12,14 +12,6 @@ const pkg = require( "package.json" )
 
 // console.log( 'load Home' )
 
-// export default function Home () {
-//   return (
-//     <>
-//       <h1>Home</h1>
-//     </>
-//   )
-// }
-
 @connect(
   ( { year } ) => ( {
     year

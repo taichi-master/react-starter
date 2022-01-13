@@ -53,8 +53,8 @@
     "lint": "./node_modules/eslint/bin/eslint.js ./src ./server",
     "test": "jest",
     "dev": "NODE_ENV=development PORT=3000 nodemon -w server server",
+    "preview": "webpack --env preview",
     "build": "webpack --env build",
-    "dist": "webpack --env dist",
     "start": "node server"
   },
   "jest": {
