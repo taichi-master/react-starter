@@ -55,10 +55,12 @@ p.s. Before running the project in production for the first time or made some ch
 
 Update Package.json:
 -------------------
+```bash
 npm install -g npm-check-updates
 ncu -u
 npm update
 npm install
+```
 
 License:
 -------
