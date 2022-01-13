@@ -1,4 +1,4 @@
-import * as types from 'models/action-types'
+import * as types from 'constants/action-types'
 
 const initState = {
   isFetching: false,
@@ -16,7 +16,7 @@ export default ( comments = initState, action ) => {
     return { ...comments, isFetching: false, didInvalidate: false, data: action.comments }
 
   case types.GET_COMMENTS_FAILURE:
-    return { ...comments, isFetching: false, didInvalidate: true, data: [] }
+    return { ...comments, isFetching: false, didInvalidate: true }
 
   default:
     return comments

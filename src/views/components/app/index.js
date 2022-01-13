@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route, Switch } from 'react-router-dom'
+import { Route, Routes } from 'react-router-dom'
 import { hot, setConfig } from 'react-hot-loader'
 import Loadable from 'react-loadable'
 import NavBar from 'components/nav-bar'
@@ -23,15 +23,15 @@ const App = () => (
     <header>
       <NavBar />
     </header>
-    <article className="main-content">
-      <Switch>
-        <Route path="/" exact component={ Home } />
-        <Route path="/hooks" component={ Hooks } />
-        <Route path="/lifecycle" component={ Lifecycle } />
-        <Route path="/about" component={ About } />
-        <Route component={ NoMatch } />
-      </Switch>
-    </article>
+    <main className="main-content">
+      <Routes>
+        <Route path="/" element={ <Home /> } />
+        <Route path="/hooks" element={ <Hooks /> } />
+        <Route path="/lifecycle" element={ <Lifecycle /> } />
+        <Route path="/about" element={ <About /> } />
+        <Route element={ <NoMatch /> } />
+      </Routes>
+    </main>
     <footer className="footer">
       <div className="center">
         <FootLinks />

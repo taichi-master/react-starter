@@ -1,4 +1,4 @@
-import * as types from 'models/action-types'
+import * as types from 'constants/action-types'
 
 const initState = {
   isFetching: false,
@@ -16,7 +16,7 @@ export default ( posts = initState, action ) => {
     return { ...posts, isFetching: false, didInvalidate: false, data: action.posts }
 
   case types.GET_POSTS_FAILURE:
-    return { ...posts, isFetching: false, didInvalidate: true, data: [] }
+    return { ...posts, isFetching: false, didInvalidate: true }
 
   default:
     return posts

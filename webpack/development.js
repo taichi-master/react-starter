@@ -16,7 +16,7 @@ module.exports = env => merge( commonConfig, {
   entry: {
     main: [
       './main.js',
-      '@babel/polyfill', // required by jest
+      // '@babel/polyfill', // required by jest
       'webpack-hot-middleware/client' // required by webpack-hot-middleware
     ]
   },

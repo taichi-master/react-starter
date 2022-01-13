@@ -14,7 +14,8 @@ const SOURCE_DIR = path.resolve( __dirname, '../src' ),
       PACKAGE_JSON = path.resolve( __dirname, '../package.json' ),
       VIEWS_DIR = path.join( SOURCE_DIR, 'views' ),
       COMPONENTS_DIR = path.join( VIEWS_DIR, 'components' ),
-      MODELS_DIR = path.join( SOURCE_DIR, 'models' )
+      MODELS_DIR = path.join( SOURCE_DIR, 'models' ),
+      CONSTANTS_DIR = path.join( MODELS_DIR, 'constants' )
 
 const babel = {
   loader: 'babel-loader',
@@ -46,6 +47,7 @@ module.exports = isDev => ( {
       node_modules: NODE_MODULES_DIR,
       src: SOURCE_DIR,
       models: MODELS_DIR,
+      constants: CONSTANTS_DIR,
       views: VIEWS_DIR,
       components: COMPONENTS_DIR
     }

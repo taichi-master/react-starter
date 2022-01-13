@@ -53,6 +53,13 @@ npm start
 ```
 p.s. Before running the project in production for the first time or made some changes to the project, you would need to either build or dist the project first.
 
+Update Package.json:
+-------------------
+npm install -g npm-check-updates
+ncu -u
+npm update
+npm install
+
 License:
 -------
 ISC &copy; 2019 Kei Sing Wong

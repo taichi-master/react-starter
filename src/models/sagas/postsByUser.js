@@ -1,6 +1,6 @@
 import { takeEvery, call, put } from 'redux-saga/effects'
 import * as api from './api'
-import { GET_POSTS_BY_USER, GET_POSTS_SUCCESS, GET_POSTS_FAILURE } from 'models/action-types'
+import { GET_POSTS_BY_USER, GET_POSTS_SUCCESS, GET_POSTS_FAILURE } from 'constants/action-types'
 
 function* getPostsByUser ( action ) {
   try {

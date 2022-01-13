@@ -1,4 +1,4 @@
-import * as types from 'models/action-types'
+import * as types from 'constants/action-types'
 
 export default ( year = 0, action ) => {
   switch ( action.type ) {

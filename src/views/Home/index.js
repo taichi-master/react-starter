@@ -12,13 +12,21 @@ const pkg = require( "package.json" )
 
 // console.log( 'load Home' )
 
+// export default function Home () {
+//   return (
+//     <>
+//       <h1>Home</h1>
+//     </>
+//   )
+// }
+
 @connect(
   ( { year } ) => ( {
     year
   } ),
   { getPostsByUser, getCommentsByPost }
 )
-export default class Home extends React.Component {
+export default class HomeClass extends React.Component {
 
   state = {
     year: this.props.year
@@ -48,7 +56,6 @@ export default class Home extends React.Component {
             _.range( defaultYear, defaultYear - 5 ).map( ( x, i ) => <Item key={ i }>{ x }</Item> )
           }
         </List>
-
       </div>
     )
   }
