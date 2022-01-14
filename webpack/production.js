@@ -15,8 +15,8 @@ const DIST_DIR = path.resolve( __dirname, '../dist' ),
       LIBS_DIR = path.resolve( __dirname, '../server/libs' )
 
 module.exports = ( env ) => {
-  const isBuild = env && env.build || false,
-        isPreview = env && env.preview || false
+  const isBuild = env && env.build || false
+  // isPreview = env && env.preview || false
 
   const web_config = merge( commonConfig, {
     mode: isBuild ? 'production' : 'none',
@@ -66,6 +66,7 @@ module.exports = ( env ) => {
     devtool: false,
 
     entry: {
+      utils: './utils/index',
       App: './views/components/app',
       reducers: './models/reducers'
     },

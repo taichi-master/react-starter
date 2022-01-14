@@ -40,3 +40,4 @@ assets/bower_components
 .idea
 .DS_Store
 *.map
+.vscode

@@ -65,7 +65,7 @@ function setRoutes ( app ) {
   app.use( logger( 'dev' ) )
 
   // REST API
-  // app.use( '/api/features', require( './api/features' ))
+  app.use( '/api/sleep', require( './api/sleep' ) )
   app.enable( 'trust proxy' )
 
   // main
