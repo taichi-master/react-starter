@@ -8,6 +8,8 @@ import _ from 'lodash'
 
 import { getPostsByUser, getCommentsByPost } from 'models/actions'
 
+import Spinner from 'components/spinner'
+
 const pkg = require( "package.json" )
 
 // console.log( 'load Home' )
@@ -40,6 +42,8 @@ export default class HomeClass extends React.Component {
       <div className="home">
         <h1>Home</h1>
 
+        <Spinner />
+        
         <h1 className="project">{ pkg.name }</h1>
 
         <Counter style={ { margin: "1em 0" } } />

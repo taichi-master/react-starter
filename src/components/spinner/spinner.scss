@@ -1,0 +1,13 @@
+.spinner > svg {
+  width: 30px;
+  height: 30px;
+  animation: spinner 0.7s linear infinite;
+  color: rgba(10, 10, 10, .5);
+  margin: auto;
+}
+
+@keyframes spinner {
+  to {
+    transform: rotate(360deg);
+  }
+}

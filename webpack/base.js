@@ -67,7 +67,22 @@ module.exports = isDev => ( {
           'css-loader',
           'sass-loader'
         ]
+      },
+      {
+        test: /\.svg$/,
+        use: [ '@svgr/webpack' ]
       }
+      // {
+      //   test: /\.(png|jp(e*)g|svg|gif)$/,
+      //   use: [
+      //     {
+      //       loader: 'file-loader',
+      //       options: {
+      //         name: 'images/[hash]-[name].[ext]'
+      //       }
+      //     }
+      //   ]
+      // }
       // {
       //   test: /\.json$/,
       //   loader: 'json-loader'
