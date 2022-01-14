@@ -67,7 +67,7 @@ module.exports = ( env ) => {
 
     entry: {
       utils: './utils/index',
-      App: './views/components/app',
+      App: './components/app',
       reducers: './models/reducers'
     },
 
