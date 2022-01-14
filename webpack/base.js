@@ -12,8 +12,8 @@ const SOURCE_DIR = path.resolve( __dirname, '../src' ),
       TEST_DIR = path.resolve( __dirname, '../test' ),
       NODE_MODULES_DIR = path.resolve( __dirname, '../node_modules' ),
       PACKAGE_JSON = path.resolve( __dirname, '../package.json' ),
-      VIEWS_DIR = path.join( SOURCE_DIR, 'views' ),
-      COMPONENTS_DIR = path.join( VIEWS_DIR, 'components' ),
+      ROUTES_DIR = path.join( SOURCE_DIR, 'routes' ),
+      COMPONENTS_DIR = path.join( SOURCE_DIR, 'components' ),
       MODELS_DIR = path.join( SOURCE_DIR, 'models' ),
       CONSTANTS_DIR = path.join( MODELS_DIR, 'constants' )
 
@@ -48,7 +48,7 @@ module.exports = isDev => ( {
       src: SOURCE_DIR,
       models: MODELS_DIR,
       constants: CONSTANTS_DIR,
-      views: VIEWS_DIR,
+      routes: ROUTES_DIR,
       components: COMPONENTS_DIR
     }
   },

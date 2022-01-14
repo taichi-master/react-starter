@@ -5,13 +5,13 @@ import Loadable from 'react-loadable'
 import NavBar from 'components/nav-bar'
 import FootLinks from 'components/foot-links'
 import Loading from 'components/loading'
-import Home from 'views/Home'
-import Hooks from 'views/Hooks'
-import Lifecycle from 'views/Lifecycle'
-import NoMatch from 'views/404'
+import Home from 'routes/home'
+import Hooks from 'routes/hooks'
+import Lifecycle from 'routes/lifecycle'
+import NoMatch from 'routes/404'
 
 const About = Loadable( {
-  loader: () => import( 'views/About' ),
+  loader: () => import( 'routes/About' ),
   loading: Loading
 } )
 

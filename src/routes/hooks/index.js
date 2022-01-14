@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from 'react'
-import Title from '../components/title'
-import Button from '../components/button'
+import Title from 'components/title'
+import Button from 'components/button'
 
 function Hooks () {
   const [ count, setCount ] = useState( 0 )
