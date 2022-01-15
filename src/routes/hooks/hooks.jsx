@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from 'react'
-import { Button, Title } from 'components/index'
+import { Button, Title } from '../../components'
 
 export function Hooks () {
   const [ count, setCount ] = useState( 0 )

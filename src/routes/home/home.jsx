@@ -1,7 +1,7 @@
 import React from 'react'
 // import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { Counter, List, Item, Spinner } from 'components/index'
+import { Counter, List, Item, Spinner } from '../../components'
 import _ from 'lodash'
 
 import { getPostsByUser, getCommentsByPost } from 'models/actions'

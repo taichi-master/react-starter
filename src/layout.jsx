@@ -3,8 +3,8 @@ import { Route, Routes } from 'react-router-dom'
 import { hot, setConfig } from 'react-hot-loader'
 import Loadable from 'react-loadable'
 
-import { NavBar, FootLinks, Loading } from 'components/index'
-import { Home, Hooks, Lifecycle, NoMatch, About } from 'routes/index'
+import { NavBar, FootLinks, Loading } from './components'
+import { Home, Hooks, Lifecycle, NoMatch, About } from './routes'
 // import { About } from 'routes/index'
 
 // TODO: Lazy load is not working
