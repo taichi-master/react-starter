@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Title ( props ) {
+function _Title ( props ) {
   const { children } = props
 
   return (
@@ -8,4 +8,4 @@ function Title ( props ) {
   )
 }
 
-export default React.memo( Title )
+export const Title = React.memo( _Title )

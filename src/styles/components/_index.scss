@@ -1,8 +1,8 @@
 /* components */
-@import 'components/app/style.scss';
-@import 'components/nav-bar/style.scss';
-@import 'components/counter/style.scss';
-@import 'components/list/style.scss';
-@import 'components/item/style.scss';
-@import 'components/foot-links/style.scss';
+@import 'src/layout.scss';
+@import 'components/nav-bar/nav-bar.scss';
+@import 'components/counter/counter.scss';
+@import 'components/list/list.scss';
+@import 'components/item/item.scss';
+@import 'components/foot-links/foot-links.scss';
 @import 'components/spinner/spinner.scss';

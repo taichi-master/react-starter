@@ -58,8 +58,10 @@ module.exports = ( env ) => {
     ]
   } )
 
+      
+  const mode = isBuild ? 'production' : 'development'
   const node_config = merge( commonConfig, {
-    mode: isBuild ? 'production' : 'development',
+    mode,
 
     target: 'node',
 
@@ -67,7 +69,7 @@ module.exports = ( env ) => {
 
     entry: {
       utils: './utils/index',
-      App: './components/app',
+      App: './layout.jsx',
       reducers: './models/reducers'
     },
 
@@ -92,7 +94,7 @@ module.exports = ( env ) => {
       new webpack.DefinePlugin( {
         'process.env': {
           BROWSER: JSON.stringify( false ),
-          NODE_ENV: JSON.stringify( 'production' )
+          NODE_ENV: JSON.stringify( mode )
         }
       } )
     ]

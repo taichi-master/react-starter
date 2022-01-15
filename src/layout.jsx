@@ -2,23 +2,21 @@ import React from 'react'
 import { Route, Routes } from 'react-router-dom'
 import { hot, setConfig } from 'react-hot-loader'
 import Loadable from 'react-loadable'
-import NavBar from 'components/nav-bar'
-import FootLinks from 'components/foot-links'
-import Loading from 'components/loading'
-import Home from 'routes/home'
-import Hooks from 'routes/hooks'
-import Lifecycle from 'routes/lifecycle'
-import NoMatch from 'routes/404'
 
-const About = Loadable( {
-  loader: () => import( 'routes/About' ),
-  loading: Loading
-} )
+import { NavBar, FootLinks, Loading } from 'components/index'
+import { Home, Hooks, Lifecycle, NoMatch, About } from 'routes/index'
+// import { About } from 'routes/index'
+
+// TODO: Lazy load is not working
+// const About = Loadable( {
+//   loader: () => import( 'routes/about' ),
+//   loading: Loading
+// } )
 
 if ( module.hot )
   setConfig( { logLevel: 'no-errors-please' } )
 
-const App = () => (
+const Layout = () => (
   <>
     <header>
       <NavBar />
@@ -41,4 +39,4 @@ const App = () => (
   </>
 )
 
-export default module.hot ? hot( module )( App ) : App
+export default module.hot ? hot( module )( Layout ) : Layout
