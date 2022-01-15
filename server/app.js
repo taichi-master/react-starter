@@ -96,17 +96,16 @@ if ( isDev ) {
   try {
     // Hot reload
     const webpack = require( 'webpack' ),
-          webpackDevMiddleware = require( 'webpack-dev-middleware' ),
-          webpackHotMiddleware = require( 'webpack-hot-middleware' ),
           config = require( '../webpack/development.js' )(),
           compiler = webpack( config )
 
-    app.use( webpackDevMiddleware( compiler, {
+    app.use( require( 'webpack-dev-middleware' )( compiler, {
       publicPath: config.output.publicPath,
       stats: { colors: true }
     } ) )
 
-    app.use( webpackHotMiddleware( compiler, {
+    app.use( require( 'webpack-hot-middleware' )( compiler, {
+      hot: true,
       log: console.warn
     } ) )
 

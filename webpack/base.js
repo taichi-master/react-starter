@@ -40,7 +40,7 @@ module.exports = isDev => ( {
   resolve: {
     alias: {
       'package.json': PACKAGE_JSON,
-      'react-dom': isDev ? '@hot-loader/react-dom' : 'react-dom',
+      'react-dom': 'react-dom',
       server: SERVER_DIR,
       styles: STYLES_DIR,
       test: TEST_DIR,
@@ -58,7 +58,15 @@ module.exports = isDev => ( {
       {
         test: /\.jsx?$/,
         exclude: [ /node_modules/ ],
-        use: isDev ? [ babel, 'react-hot-loader/webpack' ] : babel
+        use: [
+          {
+            loader: require.resolve( 'babel-loader' ),
+            options: {
+              plugins: [ isDev && require.resolve( 'react-refresh/babel' ) ].filter( Boolean )
+            }
+          }
+        ]
+        // use: isDev ? [ babel, 'react-hot-loader/webpack' ] : babel
       },
       {
         test: /\.(sa|sc|c)ss$/,

@@ -7,6 +7,7 @@ import { setYear } from 'models/actions'
 import _ from 'lodash'
 const pkg = require( "package.json" )
 
+// FIXME: react-refresh (hot reload) doesn't work will react class based component.
 @connect( ( { year } ) => ( {
   year
 } ), { setYear } )

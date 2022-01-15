@@ -1,11 +1,11 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
-import { hot, setConfig } from 'react-hot-loader'
+// import { hot, setConfig } from 'react-hot-loader'
 import Loadable from 'react-loadable'
 
 import { NavBar, FootLinks, Loading } from './components'
 import { Home, Hooks, Lifecycle, NoMatch, About } from './routes'
-// import { About } from 'routes/index'
+// import { About } from './routes/about'
 
 // TODO: Lazy load is not working
 // const About = Loadable( {
@@ -13,8 +13,16 @@ import { Home, Hooks, Lifecycle, NoMatch, About } from './routes'
 //   loading: Loading
 // } )
 
-if ( module.hot )
-  setConfig( { logLevel: 'no-errors-please' } )
+if ( process.env.NODE_ENV !== 'production' && typeof window !== 'undefined' ) {
+  const runtime = require( 'react-refresh/runtime' )
+
+  runtime.injectIntoGlobalHook( window )
+  window.$RefreshReg$ = () => {}
+  window.$RefreshSig$ = () => type => type
+}
+
+// if ( module.hot )
+//   setConfig( { logLevel: 'no-errors-please' } )
 
 const Layout = () => (
   <>
@@ -39,4 +47,5 @@ const Layout = () => (
   </>
 )
 
-export default module.hot ? hot( module )( Layout ) : Layout
+// export default module.hot ? hot( module )( Layout ) : Layout
+export default Layout

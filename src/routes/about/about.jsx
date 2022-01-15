@@ -21,12 +21,29 @@ import React from 'react'
 // Prefer React.PureComponent then pure function, otherwise findRenderedComponentWithType from react-dom/test-utils won't work.
 
 export class About extends React.PureComponent {
+
+  static hints
+
+  hints
+
+  // In order for React class component to work, add a dummy empty field called 'hints' into the class. 
+
   render () {
     return (
       <div className="about">
         <h1>About...</h1>
+        <input type="text" />
         <h1>Lazy Loading Not Working</h1>
       </div>
     )
   }
 }
+
+// export function About () {
+//   return (
+//     <div className="about">
+//       <h1>About...</h1>
+//       <h1>FIXME: Lazy Loading Not Working</h1>
+//     </div>
+//   )
+// }

@@ -3,7 +3,7 @@ const path = require( 'path' )
 const webpack = require( 'webpack' ),
       { merge } = require( 'webpack-merge' )
       // HtmlWebpackPlugin = require( 'html-webpack-plugin' )
-
+const ReactRefreshWebpackPlugin = require( '@pmmmwh/react-refresh-webpack-plugin' )
 const distFolder = 'dist'
 const commonConfig = require( './base.js' )( true )
 
@@ -15,7 +15,7 @@ module.exports = env => merge( commonConfig, {
   // entry: [ '@babel/polyfill', './src/main.js' ],
   entry: {
     main: [
-      './main.js',
+      './main.jsx',
       // '@babel/polyfill', // required by jest
       'webpack-hot-middleware/client' // required by webpack-hot-middleware
     ]
@@ -38,6 +38,7 @@ module.exports = env => merge( commonConfig, {
     //   appMountId: 'root'
     // }),
     new webpack.HotModuleReplacementPlugin(),
+    new ReactRefreshWebpackPlugin(),
     new webpack.DefinePlugin( {
       'process.env': {
         BROWSER: JSON.stringify( true ),
