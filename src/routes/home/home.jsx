@@ -5,10 +5,11 @@ import { Counter, List, Item, Spinner } from '../../components'
 import _ from 'lodash'
 
 import { getPostsByUser, getCommentsByPost } from 'models/actions'
+import { logLoading } from '../../utils'
+
+logLoading( 'home' )
 
 const pkg = require( "package.json" )
-
-// console.log( 'load Home' )
 
 @connect(
   ( { year } ) => ( {
@@ -16,7 +17,7 @@ const pkg = require( "package.json" )
   } ),
   { getPostsByUser, getCommentsByPost }
 )
-export class Home extends React.Component {
+export default class Home extends React.Component {
 
   state = {
     year: this.props.year

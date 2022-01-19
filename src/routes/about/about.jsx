@@ -1,4 +1,7 @@
 import React from 'react'
+import { logLoading } from '../../utils'
+
+logLoading( 'about' )
 
 // console.log( 'load About' )
 
@@ -20,9 +23,7 @@ import React from 'react'
 
 // Prefer React.PureComponent then pure function, otherwise findRenderedComponentWithType from react-dom/test-utils won't work.
 
-export class About extends React.PureComponent {
-
-  static hints
+export default class About extends React.PureComponent {
 
   hints
 

@@ -1,9 +1,12 @@
 import React from 'react'
+import { logLoading } from '../../utils'
 
-// console.log( 'load NoMatch' )
+logLoading( 'NoMatch' )
 
-export const NoMatch = ( { location } ) => (
+const NoMatch = ( { location } ) => (
   <div>
     <h3>Page not found for <code>{ location.pathname }</code></h3>
   </div>
 )
+
+export default NoMatch

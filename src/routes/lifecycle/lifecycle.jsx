@@ -5,13 +5,17 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { setYear } from 'models/actions'
 import _ from 'lodash'
+import { logLoading } from '../../utils'
+
+logLoading( 'lifecycle' )
+
 const pkg = require( "package.json" )
 
 // FIXME: react-refresh (hot reload) doesn't work will react class based component.
 @connect( ( { year } ) => ( {
   year
 } ), { setYear } )
-export class Lifecycle extends React.Component {
+export default class Lifecycle extends React.Component {
 
   static propTypes = {
     setYear: PropTypes.func.isRequired

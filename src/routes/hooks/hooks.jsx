@@ -1,7 +1,10 @@
 import React, { useState, useCallback } from 'react'
 import { Button, Title } from '../../components'
+import { logLoading } from '../../utils'
 
-export function Hooks () {
+logLoading( 'hooks' )
+
+export default function Hooks () {
   const [ count, setCount ] = useState( 0 )
 
   const increase = useCallback( function increase () {

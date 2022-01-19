@@ -1,4 +1,5 @@
-const path = require( 'path' )
+const path = require( 'path' ),
+      resolvePath = folder => path.resolve( __dirname, folder )
 
 const express = require( 'express' ),
       compression = require( 'compression' ),
@@ -15,6 +16,11 @@ const pkg = require( '../package.json' ),
         'main.css': 'main.css'
       },
       isDev = process.env.NODE_ENV === 'development'
+
+// @loadable/component      
+const { ChunkExtractor } = require( '@loadable/server' ),
+      statsFile = resolvePath( 'libs/loadable-stats.json' ),
+      extractor = new ChunkExtractor( { statsFile } )
 
 // React and Redux.
 const React = require( 'react' ),
@@ -76,10 +82,16 @@ function setRoutes ( app ) {
     const appHtml = isDev ? '<h1>Loading...</h1>' : ReactDOMServer.renderToString(
       React.createElement( Provider, { store },
         React.createElement( StaticRouter, { location:req.url, context },
-          React.createElement( App )
+          extractor.collectChunks(
+            React.createElement( App )
+          )
         )
       )
     )
+
+    // const scriptTags = extractor.getScriptTags()
+
+    // console.log( scriptTags )
 
     if ( context.url ) {
       res.writeHead( 301, {

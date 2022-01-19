@@ -1,5 +1,0 @@
-export * from './404'
-export * from './about'
-export * from './home'
-export * from './hooks'
-export * from './lifecycle'

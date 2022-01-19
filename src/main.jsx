@@ -8,10 +8,8 @@ import { BrowserRouter } from 'react-router-dom'
 
 import App from './layout.jsx'
 import store from 'models/configureStore'
-
-export function logLoading ( component ) {
-  return console.log( `🎉 loading %c${component}%c.jsx  🎉`, 'font-size: 1.5em; text-transform: capitalize;', '' )
-}
+import { loadableReady } from '@loadable/component'
+import { logLoading } from './utils'
 
 logLoading( 'main' )
 
@@ -24,6 +22,17 @@ if ( process.env.NODE_ENV !== 'production' && typeof window !== 'undefined' ) {
   window.$RefreshReg$ = () => {}
   window.$RefreshSig$ = () => type => type
 }
+
+// loadableReady( () => {
+//   ReactDOM.hydrate(
+//     <Provider store={ store }>
+//       <BrowserRouter>
+//         <App />
+//       </BrowserRouter>
+//     </Provider>,
+//     document.getElementById( 'root' )
+//   )
+// } )
 
 ReactDOM.render(
   <Provider store={ store }>

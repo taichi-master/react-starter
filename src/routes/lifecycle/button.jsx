@@ -1,6 +1,6 @@
 import React from 'react'
 
-class Title extends React.PureComponent {
+export default class Title extends React.PureComponent {
   render () {
     const { children, onClick } = this.props
     
@@ -11,5 +11,3 @@ class Title extends React.PureComponent {
     )
   }
 }
-
-export default Title
