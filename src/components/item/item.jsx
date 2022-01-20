@@ -4,7 +4,7 @@ import React from 'react'
 import { setYear } from 'models/actions'
 import { useDispatch } from 'react-redux'
 
-export function Item ( props ) {
+export default function Item ( props ) {
   const { children } = props,
         dispatch = useDispatch()
   

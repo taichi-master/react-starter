@@ -1,1 +1,1 @@
-export * from './foot-links.jsx'
+export { default as FootLinks } from './foot-links.jsx'

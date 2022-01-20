@@ -1,1 +1,1 @@
-export * from './item.jsx'
+export { default as Item } from './item.jsx'

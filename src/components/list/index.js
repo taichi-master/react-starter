@@ -1,1 +1,1 @@
-export * from './list.jsx'
+export { default as List } from './list.jsx'

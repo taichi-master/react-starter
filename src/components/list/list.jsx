@@ -1,6 +1,6 @@
 import React from 'react'
 
-export function List ( props ) {
+export default function List ( props ) {
   const { title, children } = props
 
   return (

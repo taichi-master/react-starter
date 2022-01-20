@@ -1,6 +1,6 @@
 import React from 'react'
 
-function _Button ( props ) {
+function Button ( props ) {
   const { children, onClick } = props
   
   return (
@@ -10,4 +10,4 @@ function _Button ( props ) {
   )
 }
 
-export const Button = React.memo( _Button )
+export default React.memo( Button )

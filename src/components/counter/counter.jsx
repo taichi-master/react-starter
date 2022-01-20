@@ -15,7 +15,7 @@ const Button = styled.button`
   padding: 0 .5em;
 `
 
-export class Counter extends React.Component {
+export default class Counter extends React.Component {
   state = { count: this.props.count || 0 }
 
   increment = () => {

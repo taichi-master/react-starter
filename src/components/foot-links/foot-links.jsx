@@ -4,7 +4,7 @@ import { intersperse } from 'src/utils'
 
 const footLinks = require( "package.json" ).cfg.footLinks
 
-export const FootLinks = () => (
+export default () => (
   <div className="foot-links">
     {
       intersperse(

@@ -1,1 +1,1 @@
-export * from './title.jsx'
+export { default as Title } from './title.jsx'
