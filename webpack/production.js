@@ -90,14 +90,14 @@ module.exports = ( env ) => {
       libraryTarget: 'commonjs2'
     },
 
-    // externals: /^[a-z\-0-9]+$/,
-    externals: [
-      'react',
-      'react-dom',
-      '@loadable/component',
-      'react-router',
-      'react-router-dom'
-    ],
+    externals: /^[a-z\-0-9]+$/,
+    // externals: [
+    //   'react',
+    //   'react-dom',
+    //   '@loadable/component',
+    //   'react-router',
+    //   'react-router-dom'
+    // ],
 
     optimization: {
       runtimeChunk: false
