@@ -26,21 +26,23 @@ if ( !isDev ) {
 // @loadable/component      
 const { ChunkExtractor } = require( '@loadable/server' ),
       statsFile = resolvePath( 'libs/loadable-stats.json' ),
-      extractor = new ChunkExtractor( { statsFile } )
+      extractor = new ChunkExtractor( { statsFile } ),
+      { default: App } = extractor.requireEntrypoint( 'app' )
 
 // React and Redux.
 const React = require( 'react' ),
       ReactDOMServer = require( 'react-dom/server' ),
       { StaticRouter } = require( 'react-router-dom/server' ),
 
-      App = isDev ? null : require( './libs/App' ).default,
+      // App = isDev ? null : require( './libs/App' ).default,
       // { createStore, applyMiddleware } = require( 'redux' ), // server side redux
       { createStore } = require( 'redux' ), // server side redux
       { Provider } = require( 'react-redux' ),
       // thunkMiddleware = require( 'redux-thunk' ).default,
       // store = isDev ? null : createStore( require( './libs/reducers' ).default, pkg.cfg.initialState, applyMiddleware( thunkMiddleware ))
       store = isDev ? null : createStore( require( './libs/reducers' ).default, pkg.cfg.initialState )
-
+      // store = null
+      
 module.exports = function setRoutes ( app ) {
   app.use( compression() )
   app.use( favicon( resolvePath( '../assets/favicon.ico' ) ) )

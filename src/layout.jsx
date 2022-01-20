@@ -1,6 +1,5 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
-// import { hot, setConfig } from 'react-hot-loader'
 import loadable from '@loadable/component'
 
 import { NavBar, FootLinks, Loading } from './components'
@@ -11,7 +10,6 @@ import { logLoading } from './utils'
 
 logLoading( 'layout' )
 
-// TODO: Lazy load is not working
 const Hooks = loadable( _ => import( './routes/hooks/hooks.jsx' ), { fallback: <Loading /> } )
 
 const About = loadable( _ => import( './routes/about/about.jsx' ), { fallback: <Loading /> } )
@@ -24,10 +22,7 @@ if ( process.env.NODE_ENV !== 'production' && typeof window !== 'undefined' ) {
   window.$RefreshSig$ = () => type => type
 }
 
-// if ( module.hot )
-//   setConfig( { logLevel: 'no-errors-please' } )
-
-const Layout = () => (
+export default () => (
   <>
     <header>
       <NavBar />
@@ -49,6 +44,3 @@ const Layout = () => (
     </footer>
   </>
 )
-
-// export default module.hot ? hot( module )( Layout ) : Layout
-export default Layout

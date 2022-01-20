@@ -29,13 +29,6 @@ module.exports = ( env ) => {
 
     entry: {
       main: './main.jsx'
-      // another: './routes/about/about.jsx'
-      // about: './routes/about/about.jsx'
-      // about: {
-      //   import: './routes/about/about.jsx'
-      //   // dependOn: 'shared'
-      // }
-      // shared: 'lodash'
     },
     
     performance: {
@@ -57,6 +50,7 @@ module.exports = ( env ) => {
 
     plugins: [
       new CleanWebpackPlugin( { cleanOnceBeforeBuildPatterns: [ DIST_DIR ] } ),
+      new LoadablePlugin(),
       new MiniCssExtractPlugin( { filename: isBuild ? '[name].[contenthash].css' : '[name].css' } ),
       new WebpackManifestPlugin(),
       new webpack.DefinePlugin( {
@@ -78,9 +72,8 @@ module.exports = ( env ) => {
     devtool: false,
 
     entry: {
-      utils: './utils/index',
       app: './layout.jsx',
-      // main: './main.jsx',
+      utils: './utils/index',
       reducers: './models/reducers'
     },
 
@@ -90,19 +83,14 @@ module.exports = ( env ) => {
       libraryTarget: 'commonjs2'
     },
 
-    externals: /^[a-z\-0-9]+$/,
-    // externals: [
-    //   'react',
-    //   'react-dom',
-    //   '@loadable/component',
-    //   'react-router',
-    //   'react-router-dom'
-    // ],
+    // externals: /^[a-z\-0-9]+$/,
+    externals: require( 'webpack-node-externals' )(),
 
     optimization: {
-      runtimeChunk: false
+      runtimeChunk: false,
+      splitChunks: false
     },
-
+  
     plugins: [
       new LoadablePlugin(),
       new LodashModuleReplacementPlugin(),
