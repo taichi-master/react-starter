@@ -2,6 +2,7 @@ const path = require( 'path' ),
       resolvePath = folder => path.resolve( __dirname, folder )
 
 const express = require( 'express' ),
+      ejs = require( 'ejs' ),
       compression = require( 'compression' ),
       favicon = require( 'serve-favicon' ),
       bodyParser = require( 'body-parser' ),
@@ -35,37 +36,11 @@ const React = require( 'react' ),
       // store = isDev ? null : createStore( require( './libs/reducers' ).default, pkg.cfg.initialState, applyMiddleware( thunkMiddleware ))
       store = isDev ? null : createStore( require( './libs/reducers' ).default, pkg.cfg.initialState )
 
-function createPage ( pkg, style, initialState, appHtml ) {
-  return `
-    <!DOCTYPE html>
-    <html>
-      <head>
-        <title>${pkg.cfg.name}</title>
-        <meta charset="UTF-8">
-        <meta name="description" content="${pkg.description}">
-        <meta name="keywords" content="${pkg.keywords.join( ', ' )}">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        ${style}
-        <script>window.__INITIAL_STATE__ = ${JSON.stringify( initialState )};</script>
-      </head>
-      <body>
-        <div id="root">${appHtml}</div>
-        <script src="/${dist['vendors.js']}"></script>
-        <script src="/${dist['runtime.js']}"></script>
-        <script src="/${dist['main.js']}"></script>
-      </body>
-    </html>
-  `
-}
-
-// {/* <script src="/${dist['manifest.js']}"></script> */}
-
 function setRoutes ( app ) {
   app.use( compression() )
-  app.use( favicon( path.resolve( __dirname, '../assets', 'favicon.ico' ) ) )
-  app.use( '/', express.static( path.resolve( __dirname, '../assets' ) ) )
-  app.use( '/', express.static( path.resolve( __dirname, '../dist' ) ) )
+  app.use( favicon( resolvePath( '../assets/favicon.ico' ) ) )
+  app.use( '/', express.static( resolvePath( '../assets' ) ) )
+  app.use( '/', express.static( resolvePath( '../dist' ) ) )
   app.use( bodyParser.json() )
   app.use( bodyParser.urlencoded( { extended: false } ) )
   app.use( logger( 'dev' ) )
@@ -78,7 +53,6 @@ function setRoutes ( app ) {
   app.get( '*', function ( req, res ) {
     const context = {}
 
-    // const appHtml = '<h1>Loading...</h1>'
     const appHtml = isDev ? '<h1>Loading...</h1>' : ReactDOMServer.renderToString(
       React.createElement( Provider, { store },
         React.createElement( StaticRouter, { location:req.url, context },
@@ -89,17 +63,33 @@ function setRoutes ( app ) {
       )
     )
 
-    // const scriptTags = extractor.getScriptTags()
-
-    // console.log( scriptTags )
-
     if ( context.url ) {
       res.writeHead( 301, {
         Location: context.url
       } )
       res.end()
     } else {
-      res.send( createPage( pkg, isDev ? '' : `<link rel="stylesheet" href="/${dist['main.css']}" />`, pkg.cfg.initialState, appHtml ) )
+      const data = {
+              title: 'react-starter',
+              appHtml,
+              initialState: JSON.stringify( pkg.cfg.initialState ),
+              styles: [
+                dist['main.css']
+              ],
+              scripts: [
+                dist['vendors.js'],
+                dist['runtime.js'],
+                dist['main.js']
+              ]
+            },
+            options = {}
+      
+      ejs.renderFile( resolvePath( 'index.ejs' ), data, options, function ( err, str ) {
+        if ( err )
+          res.status( 500 ).send( err )
+        else
+          res.send( str )  
+      } )
     }
   } )
 }
