@@ -22,26 +22,6 @@ if ( !isDev ) {
 
   Object.keys( dist ).forEach( k => dist[k] = manifest[k] )
 }
-
-// @loadable/component      
-const { ChunkExtractor } = require( '@loadable/server' ),
-      statsFile = resolvePath( 'libs/loadable-stats.json' ),
-      extractor = new ChunkExtractor( { statsFile } ),
-      { default: App } = extractor.requireEntrypoint( 'app' )
-
-// React and Redux.
-const React = require( 'react' ),
-      ReactDOMServer = require( 'react-dom/server' ),
-      { StaticRouter } = require( 'react-router-dom/server' ),
-
-      // App = isDev ? null : require( './libs/App' ).default,
-      // { createStore, applyMiddleware } = require( 'redux' ), // server side redux
-      { createStore } = require( 'redux' ), // server side redux
-      { Provider } = require( 'react-redux' ),
-      // thunkMiddleware = require( 'redux-thunk' ).default,
-      // store = isDev ? null : createStore( require( './libs/reducers' ).default, pkg.cfg.initialState, applyMiddleware( thunkMiddleware ))
-      store = isDev ? null : createStore( require( './libs/reducers' ).default, pkg.cfg.initialState )
-      // store = null
       
 module.exports = function setRoutes ( app ) {
   app.use( compression() )
@@ -58,45 +38,26 @@ module.exports = function setRoutes ( app ) {
 
   // main
   app.get( '*', function ( req, res ) {
-    const context = {}
-
-    const appHtml = isDev ? '<h1>Loading...</h1>' : ReactDOMServer.renderToString(
-      React.createElement( Provider, { store },
-        React.createElement( StaticRouter, { location:req.url, context },
-          extractor.collectChunks(
-            React.createElement( App )
-          )
-        )
-      )
-    )
-
-    if ( context.url ) {
-      res.writeHead( 301, {
-        Location: context.url
-      } )
-      res.end()
-    } else {
-      const data = {
-              title: 'react-starter',
-              appHtml,
-              initialState: JSON.stringify( pkg.cfg.initialState ),
-              styles: [
-                dist['main.css']
-              ],
-              scripts: [
-                dist['vendors.js'],
-                dist['runtime.js'],
-                dist['main.js']
-              ]
-            },
-            options = {}
+    const data = {
+            appHtml : isDev ? '<h1>Loading...</h1>' : require( './ssr.js' )( req ),
+            title: 'react-starter',
+            initialState: JSON.stringify( pkg.cfg.initialState ),
+            styles: [
+              dist['main.css']
+            ],
+            scripts: [
+              dist['vendors.js'],
+              dist['runtime.js'],
+              dist['main.js']
+            ]
+          },
+          options = {}
       
-      ejs.renderFile( resolvePath( 'index.ejs' ), data, options, function ( err, str ) {
-        if ( err )
-          res.status( 500 ).send( err )
-        else
-          res.send( str )  
-      } )
-    }
+    ejs.renderFile( resolvePath( 'index.ejs' ), data, options, function ( err, str ) {
+      if ( err )
+        res.status( 500 ).send( err )
+      else
+        res.send( str )  
+    } )
   } )
 }

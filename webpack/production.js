@@ -50,7 +50,6 @@ module.exports = ( env ) => {
 
     plugins: [
       new CleanWebpackPlugin( { cleanOnceBeforeBuildPatterns: [ DIST_DIR ] } ),
-      new LoadablePlugin(),
       new MiniCssExtractPlugin( { filename: isBuild ? '[name].[contenthash].css' : '[name].css' } ),
       new WebpackManifestPlugin(),
       new webpack.DefinePlugin( {
