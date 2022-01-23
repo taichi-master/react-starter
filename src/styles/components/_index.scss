@@ -1,8 +1,9 @@
 /* components */
-@import 'src/layout.scss';
+@import 'components/brand/brand.scss';
 @import 'components/nav-bar/nav-bar.scss';
 @import 'components/counter/counter.scss';
 @import 'components/list/list.scss';
 @import 'components/item/item.scss';
 @import 'components/foot-links/foot-links.scss';
 @import 'components/spinner/spinner.scss';
+@import 'src/layout.scss';
