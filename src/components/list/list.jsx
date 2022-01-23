@@ -1,7 +1,10 @@
-import React from 'react'
+import React, { memo } from 'react'
+import { logRendering } from '../../utils'
 
-export default function List ( props ) {
+function List ( props ) {
   const { title, children } = props
+
+  logRendering( 'List', title )
 
   return (
     <div className="list">
@@ -12,3 +15,5 @@ export default function List ( props ) {
     </div>
   )
 }
+
+export default memo( List )

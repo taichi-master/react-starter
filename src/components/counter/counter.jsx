@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { memo, useState } from 'react'
 import styled from 'styled-components'
+import { logRendering } from '../../utils'
 
 const Title = styled.div`
   margin-top: 1em;
@@ -15,31 +16,31 @@ const Button = styled.button`
   padding: 0 .5em;
 `
 
-export default class Counter extends React.Component {
-  state = { count: this.props.count || 0 }
+function Counter ( props ) {
+  const { title = 'Counter', value = 0, increment, decrement } = props,
+        [ count, setCount ] = useState( value ),
+        onIncrement = () => {
+          setCount( count => count + 1 )
+          increment?.()
+        },
+        onDecrement = () => {
+          setCount( count => count - 1 )
+          decrement?.()
+        }
 
-  increment = () => {
-    this.setState( ( state, props ) => ( {
-      count: state.count + 1
-    } ) )
-  }
+  logRendering( 'counter', title, count )
 
-  decrement = () => {
-    this.setState( ( state, props ) => ( {
-      count: state.count - 1
-    } ) )
-  }
-
-  render () {
-    return (
-      <div className="counter">
-        <Title>Counter</Title>
-        <div>
-          <Button onClick={ this.decrement }>-</Button>
-          <Count>{ this.state.count }</Count>
-          <Button onClick={ this.increment }>+</Button>
-        </div>
+  return (
+    <div className="counter">
+      <Title>{ title }</Title>
+      <div>
+        <Button onClick={ onDecrement }>-</Button>
+        <Count>{ count }</Count>
+        <Button onClick={ onIncrement }>+</Button>
       </div>
-    )
-  }
+    </div>
+  )
 }
+
+// export default Counter
+export default memo( Counter )

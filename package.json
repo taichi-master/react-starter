@@ -46,7 +46,8 @@
       }
     ],
     "initialState": {
-      "year": 2022
+      "year": 2022,
+      "counter": { "value": 0 }
     }
   },
   "scripts": {
@@ -138,6 +139,7 @@
   "dependencies": {
     "@loadable/component": "^5.15.2",
     "@loadable/server": "^5.15.2",
+    "@reduxjs/toolkit": "^1.7.1",
     "axios": "^0.24.0",
     "body-parser": "^1.19.1",
     "compression": "^1.7.4",
