@@ -1,3 +1,4 @@
+export * from './brand'
 export * from './button'
 export * from './counter'
 export * from './foot-links'

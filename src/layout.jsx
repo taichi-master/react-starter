@@ -2,13 +2,15 @@ import React from 'react'
 import { Route, Routes } from 'react-router-dom'
 import loadable from '@loadable/component'
 
-import { NavBar, FootLinks, Loading } from './components'
+import { Brand, NavBar, FootLinks, Loading } from './components'
 import Home from './routes/home/home.jsx'
 import Lifecycle from './routes/lifecycle/lifecycle.jsx'
 import NoMatch from './routes/404/404.jsx'
 import { logLoading } from './utils'
 
 logLoading( 'layout' )
+
+const pkg = require( "package.json" )
 
 const Hooks = loadable( _ => import( './routes/hooks/hooks.jsx' ), { fallback: <Loading /> } )
 
@@ -25,6 +27,7 @@ if ( process.env.NODE_ENV !== 'production' && typeof window !== 'undefined' ) {
 export default () => (
   <>
     <header>
+      <Brand>{ pkg.name }</Brand>
       <NavBar />
     </header>
     <main className="main-content">
