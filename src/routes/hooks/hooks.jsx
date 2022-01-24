@@ -19,6 +19,7 @@ export default function Hooks () {
         dispatch = useDispatch(),
         [ count, setCount ] = useState( 0 )
 
+  // TODO: For optimization, please consider to put all useCallback into one useMemo.
   const increase = useCallback( e => setCount( c => c + 1 ), [] ),
         decrease = useCallback( e => setCount( c => c - 1 ), [] )
         // decrease = e => setCount( c => c - 1 )

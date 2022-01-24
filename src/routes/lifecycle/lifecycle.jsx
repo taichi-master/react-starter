@@ -1,20 +1,21 @@
 import React from 'react'
-import Title from './title.jsx'
-import Button from './button.jsx'
+import { Button, Counter, Title } from '../../components'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { setYear } from 'models/actions'
+import { increment, decrement } from '../../models/counterState'
 import _ from 'lodash'
-import { logLoading } from '../../utils'
+import { logLoading, logRendering } from '../../utils'
 
 logLoading( 'lifecycle' )
 
 const pkg = require( "package.json" )
 
 // FIXME: react-refresh (hot reload) doesn't work will react class based component.
-@connect( ( { year } ) => ( {
-  year
-} ), { setYear } )
+@connect( ( { year, counter } ) => ( {
+  year,
+  counter
+} ), { setYear, increment, decrement } )
 export default class Lifecycle extends React.Component {
 
   static propTypes = {
@@ -41,29 +42,54 @@ export default class Lifecycle extends React.Component {
 
   render () {
     const { count } = this.state,
+          { year, counter, increment, decrement } = this.props,
           defaultYear = pkg.cfg.initialState.year
+
+    logRendering( 'lifecycle', year, counter )
 
     return (
       <div className="lifecycle">
         <Title>Lifecycle</Title>
-        <div>
-          <Title>{ count }</Title>
-          <Button onClick={ this.decrease }>Decrease</Button>
-          <Button onClick={ this.increase }>Increase</Button>
-        </div>
+        <fieldset>
+          <legend>DOM State</legend>
+          <Title>{ '0' }</Title>
+          <Counter title="DOM Counter" />
 
-        <div className="list">
-          <h1>
-            <span>Selected Year { this.props.year }</span>
-          </h1>
-          <ul>
-            {
-              _.range( defaultYear, defaultYear - 5 ).map( ( x, i ) => 
-                <li className="item" key={ i } onClick={ this.select }>{ x }</li> 
-              )
-            }
-          </ul>
-        </div>
+
+        </fieldset>
+
+        <fieldset>
+          <legend>Component State</legend>
+          <div>
+            <Title>{ count }</Title>
+            <Button onClick={ this.decrease }>Decrease</Button>
+            <Button onClick={ this.increase }>Increase</Button>
+          </div>
+
+          <Title>{ count }</Title>
+          <Counter title="Component Counter" value={ count } increment={ this.increase } decrement={ this.decrease } />
+
+        </fieldset>
+
+        <fieldset>
+          <legend>Redux State</legend>
+          <Title>{ counter.value }</Title>
+          <Counter title="Store Counter" value={ counter.value } increment={ increment } decrement={ decrement } />
+
+          <div className="list">
+            <h1>
+              <span>Selected Year { year }</span>
+            </h1>
+            <ul>
+              {
+                _.range( defaultYear, defaultYear - 5 ).map( ( x, i ) => 
+                  <li className="item" key={ i } onClick={ this.select }>{ x }</li> 
+                )
+              }
+            </ul>
+          </div>
+        </fieldset>
+
       </div>
     )
   }

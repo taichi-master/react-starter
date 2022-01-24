@@ -9,8 +9,8 @@ export default function Home () {
   return (
     <div className="home">
       <h1>Home</h1>
-      <p>Waiting for React 18.</p>
       <Spinner />
+      <p>Waiting for React 18.</p>
     </div>
   )
 }
