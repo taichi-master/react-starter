@@ -43,7 +43,7 @@ export default function Hooks () {
 
   return (
     <div className="hooks">
-      <Title>Hooks</Title>
+      <h1>Hooks</h1>
       <fieldset>
         <legend>DOM State</legend>
         <Title ref={ titleRef }>0</Title>

@@ -2,12 +2,12 @@ import React from 'react'
 import { logRendering } from '../../utils'
 
 const Title = React.forwardRef( function ( props, ref ) {
-  const { children } = props
+  const { children, className } = props
 
   logRendering( 'Title', children )
 
   return (
-    <h1 className="title" ref={ ref }>{ children }</h1>
+    <div className={ className || 'title' } ref={ ref }>{ children }</div>
   )
 } )
 

@@ -53,7 +53,7 @@ export default class Lifecycle extends React.Component {
 
     return (
       <div className="lifecycle">
-        <Title>Lifecycle</Title>
+        <h1>Lifecycle</h1>
         <fieldset>
           <legend>DOM State</legend>
           <Title ref={ this.titleRef }>{ '0' }</Title>

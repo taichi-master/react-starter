@@ -1,20 +1,6 @@
 import React, { memo, useState } from 'react'
-import styled from 'styled-components'
+import { Button, Title } from '../../components'
 import { logRendering } from '../../utils'
-
-const Title = styled.div`
-  margin-top: 1em;
-`
-
-const Count = styled.span`
-  font-size: 5em;
-  padding: 0 1em;
-`
-
-const Button = styled.button`
-  font-size: 3em;
-  padding: 0 .5em;
-`
 
 function Counter ( props ) {
   const { title = 'Counter', value = 0, increment, decrement } = props,
@@ -32,11 +18,11 @@ function Counter ( props ) {
 
   return (
     <div className="counter">
-      <Title>{ title }</Title>
+      <Title className="counter__title">{ title }</Title>
       <div>
-        <Button onClick={ onDecrement }>-</Button>
-        <Count>{ count }</Count>
-        <Button onClick={ onIncrement }>+</Button>
+        <Button className="counter__button" onClick={ onDecrement }>-</Button>
+        <span className="counter__value">{ count }</span>
+        <Button className="counter__button" onClick={ onIncrement }>+</Button>
       </div>
     </div>
   )
