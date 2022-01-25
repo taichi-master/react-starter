@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useMemo, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { Counter, Title, List, Item } from '../../components'
+import { Counter, Title, List, ListItem } from '../../components'
 import _ from 'lodash'
 import { setYear } from 'models/actions'
 import { increment, decrement } from '../../models/counterState'
@@ -36,7 +36,7 @@ export default function Hooks () {
           const years = _.range( defaultYear, defaultYear - 5 ),
                 selectYear = e => dispatch( setYear( e.target.innerText ) )
 
-          return years.map( ( x, i ) => <Item key={ i } onClick={ selectYear }>{ x }</Item> )
+          return years.map( ( x, i ) => <ListItem key={ i } onClick={ selectYear }>{ x }</ListItem> )
         }, [ defaultYear ] )
 
   logRendering( 'hooks', year, counter )

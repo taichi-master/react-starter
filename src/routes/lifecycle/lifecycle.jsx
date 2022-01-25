@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Counter, Title } from '../../components'
+import { Counter, Title } from '../../components'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { setYear } from 'models/actions'
@@ -79,7 +79,7 @@ export default class Lifecycle extends React.Component {
             <ul>
               {
                 _.range( defaultYear, defaultYear - 5 ).map( ( x, i ) => 
-                  <li className="item" key={ i } onClick={ this.select }>{ x }</li> 
+                  <li className="list__item" key={ i } onClick={ this.select }>{ x }</li> 
                 )
               }
             </ul>
