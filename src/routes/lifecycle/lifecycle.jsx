@@ -26,6 +26,10 @@ export default class Lifecycle extends React.Component {
     count: 0
   }
 
+  titleRef = React.createRef()
+  increaseDom = e => this.titleRef.current.innerText = Number( this.titleRef.current.innerText ) + 1
+  decreaseDom = e => this.titleRef.current.innerText = Number( this.titleRef.current.innerText ) - 1
+
   increase = () => {
     this.setState( { count: this.state.count + 1 } )
   } 
@@ -52,8 +56,8 @@ export default class Lifecycle extends React.Component {
         <Title>Lifecycle</Title>
         <fieldset>
           <legend>DOM State</legend>
-          <Title>{ '0' }</Title>
-          <Counter title="DOM Counter" />
+          <Title ref={ this.titleRef }>{ '0' }</Title>
+          <Counter title="DOM Counter" increment={ this.increaseDom } decrement={ this.decreaseDom } />
 
 
         </fieldset>

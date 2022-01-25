@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useMemo } from 'react'
+import React, { useState, useCallback, useMemo, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Counter, Title, List, Item } from '../../components'
 import _ from 'lodash'
@@ -17,15 +17,19 @@ export default function Hooks () {
   const state = useSelector( state => state ),
         { year, counter } = state,
         dispatch = useDispatch(),
+        titleRef = useRef(),
         [ count, setCount ] = useState( 0 )
 
   // TODO: For optimization, please consider to put all useCallback into one useMemo.
-  const increase = useCallback( e => setCount( c => c + 1 ), [] ),
-        decrease = useCallback( e => setCount( c => c - 1 ), [] )
+  const increaseDom = useCallback( e => titleRef.current.innerText = Number( titleRef.current.innerText ) + 1, [ titleRef ] ),
+        decreaseDom = useCallback( e => titleRef.current.innerText = Number( titleRef.current.innerText ) - 1, [ titleRef ] )
+
+  const increase = useCallback( e => setCount( c => c + 1 ), [ setCount ] ),
+        decrease = useCallback( e => setCount( c => c - 1 ), [ setCount ] )
         // decrease = e => setCount( c => c - 1 )
 
-  const dispatchInc = useCallback( e => dispatch( increment() ), [] ),
-        dispatchDec = useCallback( e => dispatch( decrement() ), [] )
+  const dispatchInc = useCallback( e => dispatch( increment() ), [ dispatch, increment ] ),
+        dispatchDec = useCallback( e => dispatch( decrement() ), [ dispatch, decrement ] )
 
   const selectedYear = useMemo( () => `Selected Year ${year}`, [ year ] ),
         Items = useMemo( function () {
@@ -42,8 +46,8 @@ export default function Hooks () {
       <Title>Hooks</Title>
       <fieldset>
         <legend>DOM State</legend>
-        <Title>{ '0' }</Title>
-        <Counter title="DOM Counter" />
+        <Title ref={ titleRef }>0</Title>
+        <Counter title="DOM Counter" increment={ increaseDom } decrement={ decreaseDom } />
 
       </fieldset>
 
