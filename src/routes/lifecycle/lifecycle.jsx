@@ -31,11 +31,11 @@ export default class Lifecycle extends React.Component {
   decreaseDom = e => this.titleRef.current.innerText = Number( this.titleRef.current.innerText ) - 1
 
   increase = () => {
-    this.setState( { count: this.state.count + 1 } )
+    this.setState( ( { count } ) => ( { count: count + 1 } ) )
   } 
 
   decrease = () => {
-    this.setState( { count: this.state.count - 1 } )
+    this.setState( ( { count } ) => ( { count: count - 1 } ) )
   } 
 
   select = ( e ) => {
@@ -58,18 +58,10 @@ export default class Lifecycle extends React.Component {
           <legend>DOM State</legend>
           <Title ref={ this.titleRef }>{ '0' }</Title>
           <Counter title="DOM Counter" increment={ this.increaseDom } decrement={ this.decreaseDom } />
-
-
         </fieldset>
 
         <fieldset>
           <legend>Component State</legend>
-          <div>
-            <Title>{ count }</Title>
-            <Button onClick={ this.decrease }>Decrease</Button>
-            <Button onClick={ this.increase }>Increase</Button>
-          </div>
-
           <Title>{ count }</Title>
           <Counter title="Component Counter" value={ count } increment={ this.increase } decrement={ this.decrease } />
 
