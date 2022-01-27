@@ -1,11 +1,9 @@
-/* components */
-@import 'components/brand/brand.scss';
-@import 'components/button/button.scss';
-@import 'components/nav-bar/nav-bar.scss';
-@import 'components/counter/counter.scss';
-@import 'components/list/list.scss';
-@import 'components/list/list-item/list-item.scss';
-@import 'components/foot-links/foot-links.scss';
-@import 'components/spinner/spinner.scss';
-@import 'components/title/title.scss';
-@import 'src/layout.scss';
+@forward '../../components/brand/brand';
+@forward '../../components/button/button';
+@forward '../../components/nav-bar/nav-bar';
+@forward '../../components/counter/counter';
+@forward '../../components/list/list';
+@forward '../../components/list/list-item/list-item';
+@forward '../../components/foot-links/foot-links';
+@forward '../../components/spinner/spinner';
+@forward '../../components/title/title';

@@ -1,4 +1,15 @@
-.foot-links {
-  text-align: right;
-  margin-top: 2em;
+@use '../../styles/abstracts/mixins' as m;
+
+nav.foot-links {
+    ul {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1em;
+
+      @include m.reset-list;
+    }
+
+  // text-align: right;
+  // margin-top: 2em;
 }

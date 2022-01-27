@@ -1,0 +1,22 @@
+@forward './colors';
+@forward './fonts';
+
+$breakpoints: (
+  small: 400px,
+  medium: 600px,
+  large: 600px,
+);
+
+$colors: (
+  primary: (
+    100: hsl(14, 100%, 80%),
+  ),
+);
+
+
+
+$mobile-width: 500px;
+$desktop-width: 1024px;
+
+$medium-min-width: 800px;
+

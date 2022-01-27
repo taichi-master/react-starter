@@ -42,9 +42,7 @@ module.exports = function setRoutes ( app ) {
             appHtml : isDev ? '<h1>Loading...</h1>' : require( './ssr.js' )( req ),
             title: 'react-starter',
             initialState: JSON.stringify( pkg.cfg.initialState ),
-            styles: [
-              dist['main.css']
-            ],
+            styles: isDev ? [] : [ dist['main.css'] ],
             scripts: [
               dist['vendors.js'],
               dist['runtime.js'],

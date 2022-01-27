@@ -1,12 +1,141 @@
+@use '../../styles/abstracts/mixins' as m;
+
 .nav-bar {
+  position: absolute;
   text-align: left;
-  margin-bottom: 2em;
+  top: 100%;
+  left: 0;
+  background: var( --header-background );
+  width: 100%;
+  transform: scale(1, 0);
+  transform-origin: top;
+  transition: transform 400ms ease-in-out;
 
-  > a {
-    text-decoration: underline;
+  ul {
+    @include m.reset-list;
+  }
 
-    + a {
-      padding-left: 1em;
+  li {
+    margin-bottom: 1em;
+    margin-left: 1em;
+  }
+
+  a {
+    color: #444;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 1.2rem;
+    opacity: 0;  
+  }
+}
+
+.nav-toggle {
+  position: absolute !important;
+  top: -9999px !important;
+  left: -9999px !important;
+
+  &:checked ~ nav {
+    transform: scale(1,1);
+  }
+
+  &:checked ~ nav a {
+    opacity: 1;
+    transition: opacity 250ms ease-in-out 250ms;
+  }  
+}
+
+// .nav-toggle:focus ~ .nav-toggle-label {
+//   outline: 3px solid rgba(lightblue, .75);
+// }
+
+// hamburger
+.nav-toggle-label {
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 0 1em;
+  height: 100%;
+  display: flex;
+  align-items: center;
+
+  span,
+  span::before,
+  span::after {
+    display: block;
+    background: white;
+    height: 2px;
+    width: 2em;
+    border-radius: 2px;
+    position: relative;
+  }
+  
+  span::before,
+  span::after {
+    content: '';
+    position: absolute;
+  }
+  
+  span::before {
+    bottom: 7px;
+  }
+  
+  span::after {
+    top: 7px;
+  }
+}
+
+@media screen and (min-width: 800px) {
+  .nav-toggle-label {
+    display: none;
+  }
+
+  header {
+    display: grid;
+    grid-template-columns: 1fr auto minmax( 600px, 3fr ) 1fr;
+  }
+
+  .brand {
+    // grid-column: 2 / span 1; // same as below
+    grid-column: 2 / 3; // column 2 all the way to column 3
+  }
+
+  .nav-bar {
+    all: unset;
+    grid-column: 3 / 4;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+    ul {
+      display: flex;
     }
+
+    li {
+      margin-left: 3em;
+      margin-bottom: 0;
+    }
+  
+    a {
+      opacity: 1;
+      position: relative;
+
+      &::before {
+        content: '';
+        display: block;
+        height: 5px;
+        background: black;
+        position: absolute;
+        top: -.5em;
+        left: 0;
+        right: 0;
+        transform: scale(0, 1);
+        transition: transform ease-in-out 250ms;    
+      }
+
+      &:hover::before {
+        transform: scale(1,1);
+      }
+  }
   }
 }

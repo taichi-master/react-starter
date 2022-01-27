@@ -1,14 +1,17 @@
+// @use './styles/abstracts/variables'
+
 #root {
-  margin: 1em auto;
-  width: $mobile-width;
+  // width: 80%;
+  // margin: 0 auto;
+  // margin: 1em auto;
+  // width: $mobile-width;
 
-  @include atMedium {
-    width: $desktop-width;
-  }
+  // @include atMedium {
+  //   // width: $desktop-width;
+  // }
 
-  .counter {
-    margin: 1em auto;
-  }
+  // .counter {
+  //   margin: 1em auto;
+  // }
 
-  text-align: center;
 }

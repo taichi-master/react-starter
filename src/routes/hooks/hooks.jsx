@@ -48,14 +48,12 @@ export default function Hooks () {
         <legend>DOM State</legend>
         <Title ref={ titleRef }>0</Title>
         <Counter title="DOM Counter" increment={ increaseDom } decrement={ decreaseDom } />
-
       </fieldset>
 
       <fieldset>
         <legend>Component State</legend>
         <Title>{ count }</Title>
         <Counter title="Component Counter" value={ count } increment={ increase } decrement={ decrease } />
-
       </fieldset>
 
       <fieldset>
@@ -69,7 +67,6 @@ export default function Hooks () {
           }
         </List>
       </fieldset>
-
     </div>
   )
 }

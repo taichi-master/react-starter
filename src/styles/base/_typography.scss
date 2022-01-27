@@ -1,0 +1,8 @@
+@use '../abstracts/variables' as *;
+
+body {
+  // font-family: $bodyFontName, sans-serif;
+  // font-size: $fontSize;
+  color: $text-color;
+  font: normal $font-size $text-font-stack;
+}

@@ -40,10 +40,7 @@ export default () => (
       </Routes>
     </main>
     <footer className="footer">
-      <div className="center">
-        <FootLinks />
-        <div className="clear"></div>
-      </div>
+      <FootLinks />
     </footer>
   </>
 )

@@ -1,0 +1,16 @@
+// @use '../abstracts' as *;
+
+#root header {
+  // display: flex;
+  // background-color: #55d6aa;
+  background-color: var( --header-background );
+  text-align: center;
+  position: fixed;
+  z-index: 999;
+  width: 100%;
+
+
+  // padding: 0 1em;
+  
+  // @include clearfix;
+}

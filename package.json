@@ -58,6 +58,7 @@
     "dev": "NODE_ENV=development PORT=3000 nodemon -w server server",
     "preview": "webpack --env preview --stats-error-details",
     "build": "webpack --env build",
+    "sass": "sass src/styles/main.scss:dist/main.css --watch --no-source-map",
     "start": "node server"
   },
   "jest": {

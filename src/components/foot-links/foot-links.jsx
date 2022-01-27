@@ -5,12 +5,14 @@ import { intersperse } from 'src/utils'
 const footLinks = require( "package.json" ).cfg.footLinks
 
 export default () => (
-  <div className="foot-links">
-    {
-      intersperse(
-        footLinks.map( ( x, i ) => ( <Link to={ x.url } key={ i }>{ x.name }</Link> ) ),
-        ' | '
-      )
-    }
-  </div>
+  <nav className="foot-links" aria-label="secondary-nav">
+    <ul>
+      {
+      // intersperse(
+        footLinks.map( ( x, i ) => ( <li key={ i }><Link to={ x.url }>{ x.name }</Link></li> ) )
+      // ' | '
+      // )
+      }
+    </ul>
+  </nav>
 )

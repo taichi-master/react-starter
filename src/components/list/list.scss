@@ -1,5 +1,7 @@
+@use '../../styles/abstracts/mixins' as m;
+
 .list {
   > ul {
-    // padding-left: 5em;  
+    @include m.reset-list;
   }
 }

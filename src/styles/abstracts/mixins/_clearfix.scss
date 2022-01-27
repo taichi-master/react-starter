@@ -1,9 +1,3 @@
-@mixin atMedium {
-  @media (min-width: $medium-min-width) {
-    @content;
-  }
-}
-
 @mixin clearfix {
   &::after {
     content: "";
