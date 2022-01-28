@@ -24,23 +24,24 @@ if ( process.env.NODE_ENV !== 'production' && typeof window !== 'undefined' ) {
   window.$RefreshSig$ = () => type => type
 }
 
-export default () => (
-  <>
-    <header>
-      <Brand>{ pkg.name }</Brand>
-      <NavBar />
-    </header>
-    <main className="main-content">
-      <Routes>
-        <Route path="/" element={ <Home /> } />
-        <Route path="/hooks" element={ <Hooks /> } />
-        <Route path="/lifecycle" element={ <Lifecycle /> } />
-        <Route path="/about" element={ <About /> } />
-        <Route path="*" element={ <NoMatch /> } />
-      </Routes>
-    </main>
-    <footer className="footer">
-      <FootLinks />
-    </footer>
-  </>
-)
+export default function Layout () {
+  return (
+    <>
+      <header>
+        <Brand>{ pkg.name }</Brand>
+        <NavBar />
+      </header>
+      <main className="main-content">
+        <Routes>
+          <Route path="/" element={ <Home /> } />
+          <Route path="/hooks" element={ <Hooks /> } />
+          <Route path="/lifecycle" element={ <Lifecycle /> } />
+          <Route path="/about" element={ <About /> } />
+          <Route path="*" element={ <NoMatch /> } />
+        </Routes>
+      </main>
+      <footer className="footer">
+        <FootLinks />
+      </footer>
+    </>
+  ) }
