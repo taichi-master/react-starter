@@ -1,17 +1,32 @@
-import React from 'react'
+import React, { useEffect, Suspense } from 'react'
 // import PropTypes from 'prop-types'
 import { Spinner } from '../../components'
+import { useSelector, useDispatch } from 'react-redux'
+import { getQuoteFetch } from '../../models/quoteState'
 import { logLoading } from '../../utils'
 
 logLoading( 'home' )
 
 export default function Home () {
+  const quote = useSelector( state => state.quote.quote ),
+        dispatch = useDispatch()
+
+  useEffect( () => {
+    dispatch( getQuoteFetch( 3000 ) )
+  }, [ dispatch ] )
+
   return (
     <div className="home">
       <h1>Home</h1>
-      <article>
+      { /* <article>
         <Spinner />
         <p>Waiting for React 18.</p>
+      </article> */ }
+
+      <article>
+        <Suspense fallback={ <Spinner /> }>
+          { quote }
+        </Suspense>
       </article>
 
       <article>
