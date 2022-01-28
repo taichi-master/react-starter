@@ -6,7 +6,7 @@ logLoading( 'about' )
 export default function About () {
   return (
     <div className="about">
-      <h1>About...</h1>
+      <h1>About</h1>
       <h2>Lazy Loading</h2>
       <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat ratione obcaecati dolores est, porro, exercitationem vel dolor eveniet magnam commodi, similique saepe qui ipsa magni sed aperiam. Dolorum, possimus eos.
       Neque id beatae, ex deserunt totam aperiam cupiditate expedita possimus magni fugiat dolore recusandae placeat officia pariatur? Quisquam, a excepturi quis tempore rem inventore! Exercitationem tempora magnam molestias ab at.

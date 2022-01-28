@@ -5,7 +5,7 @@ import loadable from '@loadable/component'
 import { Brand, NavBar, FootLinks, Loading } from './components'
 import Home from './routes/home/home.jsx'
 import Lifecycle from './routes/lifecycle/lifecycle.jsx'
-import NoMatch from './routes/404/404.jsx'
+import NoMatch from './routes/no-match/no-match.jsx'
 import { logLoading } from './utils'
 
 logLoading( 'layout' )
@@ -36,7 +36,7 @@ export default () => (
         <Route path="/hooks" element={ <Hooks /> } />
         <Route path="/lifecycle" element={ <Lifecycle /> } />
         <Route path="/about" element={ <About /> } />
-        <Route element={ <NoMatch /> } />
+        <Route path="*" element={ <NoMatch /> } />
       </Routes>
     </main>
     <footer className="footer">
