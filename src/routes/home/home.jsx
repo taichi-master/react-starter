@@ -8,7 +8,7 @@ import { logLoading } from '../../utils'
 logLoading( 'home' )
 
 export default function Home () {
-  const quote = useSelector( state => state.quote.quote ),
+  const { quote, author } = useSelector( state => state.quote.content ),
         dispatch = useDispatch()
 
   useEffect( () => {
@@ -26,7 +26,12 @@ export default function Home () {
       <article>
         {
           quote
-            ? quote
+            ? (
+              <>
+                <h3>{ quote }</h3>
+                <h4>{ author }</h4> 
+              </>
+            )
             : <Spinner />
           /* <Suspense fallback={ <Spinner /> }>
             { quote }

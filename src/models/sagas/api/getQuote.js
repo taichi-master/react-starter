@@ -1,6 +1,11 @@
 export async function getQuote ( delay = 1000 ) {
-  const res = await fetch( `/api/quote?time=${delay}` ),
-        data = await res.text()
+  const res = await fetch( `/api/quote?time=${delay}` )
 
-  return data
+  if ( res.ok ) {
+    let data = await res.json()
+
+    return data
+  } else {
+    throw new Error( await res.text() )
+  }
 }

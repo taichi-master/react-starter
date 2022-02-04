@@ -3,12 +3,12 @@ import { createSlice } from "@reduxjs/toolkit"
 export const quoteSlice = createSlice( {
   name: 'quote',
   initialState: {
-    quote: '',
+    content: {},
     isLoading: false
   },
   reducers: {
     getQuoteFetch: state => ( { ...state, isLoading: true } ),
-    getQuoteSuccess: ( state, action ) => ( { quote: action.payload, isLoading: false } ),
+    getQuoteSuccess: ( state, action ) => ( { content: action.payload, isLoading: false } ),
     getQuoteFailure: state => ( { ...state, isLoading: false } )
   }
 } )

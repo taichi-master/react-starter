@@ -12,7 +12,7 @@ function setAuthor ( author ) {
     db.state = db.engine.init()
     db.pointers = []
     const length = db.get( 'quotes' ).filter( x => author ? x.author === author : true ).length().value(),
-          quote = db.get( 'quotes' ).get( Math.floor( Math.random() * length ) ).get( 'quote' ).value()
+          quote = db.get( 'quotes' ).get( Math.floor( Math.random() * length ) ).value()
   
     return function setTime ( time ) {
       return function response ( res ) {
