@@ -24,9 +24,14 @@ export default function Home () {
       </article> */ }
 
       <article>
-        <Suspense fallback={ <Spinner /> }>
-          { quote }
-        </Suspense>
+        {
+          quote
+            ? quote
+            : <Spinner />
+          /* <Suspense fallback={ <Spinner /> }>
+            { quote }
+          </Suspense> */
+        }
       </article>
 
       <article>

@@ -34,6 +34,7 @@ module.exports = function setRoutes ( app ) {
 
   // REST API
   app.use( '/api/sleep', require( './api/sleep' ) )
+  app.use( '/api/quote', require( './api/quote' ) )
   app.enable( 'trust proxy' )
 
   // main
