@@ -1,11 +1,11 @@
 import { combineReducers } from 'redux'
 
-import comments from './comments'
-import posts from './posts'
+import counter from '../counterState'
+import quote from '../quoteState'
 import year from './year'
 
 export default combineReducers( {
-  comments,
-  posts,
+  counter,
+  quote,
   year
 } )
