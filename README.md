@@ -9,7 +9,7 @@ The main different from the other React starter projects is the server side.  Fo
 - React 16 (Fiber) Isomorphic (universal) Single Page Application
 - ESnext Javascript
 - Webpack 5.xx + Express (https)
-- React Router 4 (dynamic component)
+- React Router 16 (dynamic component)
 - Lazy load components
 - Hot reload across browsers in multiple devices at the same time
 - Redux (async actions)
@@ -64,4 +64,4 @@ npm install
 
 License:
 -------
-ISC &copy; 2019 Kei Sing Wong
+ISC &copy; 2022 Kei Sing Wong
