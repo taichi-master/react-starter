@@ -1,5 +1,4 @@
 module.exports = {
-  // "parser": "@babel/eslint-parser",
   "parser": "@typescript-eslint/parser",
   "plugins": [
     "@typescript-eslint",
@@ -9,9 +8,6 @@ module.exports = {
     "eslint:recommended"
   ],
   "parserOptions": {
-    // "babelOptions": {
-    //   "presets": [ "@babel/preset-react" ]
-    // },
     "ecmaFeatures": {
       "legacyDecorators": true
     }

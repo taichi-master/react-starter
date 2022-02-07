@@ -14,11 +14,9 @@ module.exports = env => merge( commonConfig, {
 
   devtool: 'inline-source-map',
 
-  // entry: [ '@babel/polyfill', './src/main.js' ],
   entry: {
     main: [
       './main.jsx',
-      // '@babel/polyfill', // required by jest
       'webpack-hot-middleware/client' // required by webpack-hot-middleware
     ]
   },

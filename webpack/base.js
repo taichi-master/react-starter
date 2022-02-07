@@ -18,15 +18,6 @@ const SOURCE_DIR = path.resolve( __dirname, '../src' ),
       MODELS_DIR = path.join( SOURCE_DIR, 'models' ),
       CONSTANTS_DIR = path.join( MODELS_DIR, 'constants' )
 
-// const babel = {
-//   loader: 'babel-loader',
-//   options: {
-//     plugins: [
-//       // "syntax-dynamic-import"
-//     ]
-//   }
-// }
-
 module.exports = isDev => ( {
   context: SOURCE_DIR,
 
@@ -69,11 +60,9 @@ module.exports = isDev => ( {
                   !isDev && createLoadableComponentsTransformer( program, {} )
                 ].filter( Boolean )
               } )
-              // plugins: [ isDev && require.resolve( 'react-refresh/babel' ) ].filter( Boolean )
             }
           }
         ]
-        // use: isDev ? [ babel, 'react-hot-loader/webpack' ] : babel
       },
       {
         test: /\.(sa|sc|c)ss$/,
