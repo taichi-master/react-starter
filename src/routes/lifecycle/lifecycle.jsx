@@ -12,6 +12,7 @@ logLoading( 'lifecycle' )
 const pkg = require( "package.json" )
 
 // FIXME: react-refresh (hot reload) doesn't work will react class based component.
+// NOTE: It seems like the react-refresh is work after using typescript instead of babel.
 @connect( ( { year, counter } ) => ( {
   year,
   counter

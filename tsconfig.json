@@ -1,6 +1,17 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
+    "moduleResolution": "node",
+    "outDir": "./dist",
+    "target": "esnext",
     "experimentalDecorators": true,
-    "allowJs": true
+    "allowJs": true,
+    "esModuleInterop": true,
+    "jsx": "react",
+    "plugins": [
+      {
+        "transform": "typescript-loadable-components-plugin",
+      }
+    ]
   }
 }

@@ -1,6 +1,7 @@
 const path = require( 'path' )
 
-const MiniCssExtractPlugin = require( 'mini-css-extract-plugin' )
+const MiniCssExtractPlugin = require( 'mini-css-extract-plugin' ),
+      { createLoadableComponentsTransformer } = require( 'typescript-loadable-components-plugin' )
 
 // const pkg = require( '../package.json' ),
 //       webpack = require( 'webpack' ),
@@ -56,13 +57,19 @@ module.exports = isDev => ( {
   module: {
     rules: [
       {
-        test: /\.jsx?$/,
+        test: /\.[jt]sx?$/,
         exclude: [ /node_modules/ ],
         use: [
           {
-            loader: require.resolve( 'babel-loader' ),
+            loader: require.resolve( 'ts-loader' ),
             options: {
-              plugins: [ isDev && require.resolve( 'react-refresh/babel' ) ].filter( Boolean )
+              getCustomTransformers: program => ( {
+                before: [ 
+                  isDev && require( 'react-refresh-typescript' )(),
+                  !isDev && createLoadableComponentsTransformer( program, {} )
+                ].filter( Boolean )
+              } )
+              // plugins: [ isDev && require.resolve( 'react-refresh/babel' ) ].filter( Boolean )
             }
           }
         ]

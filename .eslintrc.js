@@ -1,15 +1,17 @@
 module.exports = {
-  "parser": "@babel/eslint-parser",
-   "plugins": [
+  // "parser": "@babel/eslint-parser",
+  "parser": "@typescript-eslint/parser",
+  "plugins": [
+    "@typescript-eslint",
     "react"
   ],
   "extends": [
-    "eslint:recommended",
+    "eslint:recommended"
   ],
   "parserOptions": {
-    "babelOptions": {
-      "presets": [ "@babel/preset-react" ]
-    },
+    // "babelOptions": {
+    //   "presets": [ "@babel/preset-react" ]
+    // },
     "ecmaFeatures": {
       "legacyDecorators": true
     }
@@ -17,6 +19,7 @@ module.exports = {
   "env": {
     "browser": true,
     "node": true,
+    "jest": true,
     "es6": true
   },
   "rules": {
@@ -51,13 +54,8 @@ module.exports = {
     "react/react-in-jsx-scope": "error",
     "react/jsx-uses-react": "error",
     "react/jsx-uses-vars": "error",
-    "react/jsx-tag-spacing": ["error", {"beforeSelfClosing": "always"}],
-    "react/jsx-max-depth": ["error", { "max": 9 }],
-    "react/jsx-curly-spacing": ["error", {"when": "always", "attributes": true, "children": true, "allowMultiline": true, "spacing": {"objectLiterals": "always"}}]
-  },
-  "parserOptions": {
-    "ecmaFeatures": {
-      "legacyDecorators": true
-    }
+    "react/jsx-tag-spacing": [ "error", { "beforeSelfClosing": "always" } ],
+    "react/jsx-max-depth": [ "error", { "max": 9 } ],
+    "react/jsx-curly-spacing": [ "error", { "when": "always", "attributes": true, "children": true, "allowMultiline": true, "spacing": { "objectLiterals": "always" } } ]
   }
 }
