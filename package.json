@@ -4,7 +4,7 @@
   "description": "React Boilerplate",
   "main": "index.js",
   "cfg": {
-    "name": "React",
+    "name": "React Starter",
     "menuItems": [
       {
         "name": "Home",

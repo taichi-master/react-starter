@@ -41,7 +41,7 @@ module.exports = function setRoutes ( app ) {
   app.get( '*', function ( req, res ) {
     const data = {
             appHtml : isDev ? '<h1>Loading...</h1>' : require( './ssr.js' )( req ),
-            title: 'react-starter',
+            title: pkg.cfg.name || pkg.name,
             initialState: JSON.stringify( pkg.cfg.initialState ),
             styles: isDev ? [] : [ dist['main.css'] ],
             scripts: [
