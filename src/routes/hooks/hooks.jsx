@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Counter, Title, List, ListItem } from '../../components'
 import _ from 'lodash'
 import { setYear } from 'models/actions'
-import { increment, decrement } from '../../models/counterState'
+import { increment, decrement } from '../../models/states/counterState'
 import { logLoading, logRendering } from '../../utils'
 
 logLoading( 'hooks' )

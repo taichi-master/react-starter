@@ -3,7 +3,7 @@ import { Counter, Title } from '../../components'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { setYear } from 'models/actions'
-import { increment, decrement } from '../../models/counterState'
+import { increment, decrement } from '../../models/states/counterState'
 import _ from 'lodash'
 import { logLoading, logRendering } from '../../utils'
 

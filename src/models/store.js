@@ -6,14 +6,16 @@ import rootSaga from 'models/sagas'
 import year from 'models/reducers/year'
 
 import { configureStore } from '@reduxjs/toolkit'
-import counter from './counterState'
-import quote from './quoteState'
+import {
+  counter,
+  quote
+} from './states'
 
 // import * as types from './constants/action-types'
 
 const saga = createSagaMiddleware()
 
-export default configureStore( {
+const store = configureStore( {
   reducer: {
     counter,
     quote,
@@ -41,4 +43,4 @@ export default configureStore( {
 
 saga.run( rootSaga )
 
-// export default store
+export default store

@@ -7,7 +7,7 @@ import { Provider } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
 
 import App from './layout.jsx'
-import store from 'models/configureStore'
+import store from 'models/store'
 // import { loadableReady } from '@loadable/component'
 import { logLoading } from './utils'
 

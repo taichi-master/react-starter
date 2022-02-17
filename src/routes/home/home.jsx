@@ -2,7 +2,7 @@ import React, { useEffect, Suspense } from 'react'
 // import PropTypes from 'prop-types'
 import { Spinner } from '../../components'
 import { useSelector, useDispatch } from 'react-redux'
-import { getQuoteFetch } from '../../models/quoteState'
+import { getQuoteFetch } from '../../models/states/quoteState'
 import { logLoading } from '../../utils'
 
 logLoading( 'home' )

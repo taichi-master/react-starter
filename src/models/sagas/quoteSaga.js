@@ -1,5 +1,5 @@
 import { call, put, takeEvery } from 'redux-saga/effects'
-import { getQuoteSuccess, getQuoteFailure } from '../quoteState'
+import { getQuoteSuccess, getQuoteFailure } from '../states/quoteState'
 import * as api from './api'
 
 function* workGetQuoteFetch ( action ) {
