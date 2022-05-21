@@ -6,15 +6,15 @@ Most of the React starter projects are either too simple or way too complicated.
 The main different from the other React starter projects is the server side.  For some reasons I don't like to use babel-node to run the server. Since it is isomorphic, I use Webpack to compile the JSX when it is needed.
 
 ## Features:
-- React 16 (Fiber) Isomorphic (universal) Single Page Application
+- React 18 Isomorphic (universal) Single Page Application
 - ESnext Javascript
 - Webpack 5.xx + Express (https)
-- React Router 16 (dynamic component)
+- React Router 6 (dynamic component)
 - Lazy load components
 - Hot reload across browsers in multiple devices at the same time
 - Redux (async actions)
 - REST API
-- Inverted CSS with Sass
+- Sass
 - No jQuery
 - Server/Client Unit Testing (Mocha Mocha-Webpack Chai Sinon jsdom Enzyme)
 
