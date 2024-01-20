@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux'
 
-import counter from '../counterState'
-import quote from '../quoteState'
+import counter from '../states/counterState'
+import quote from '../states/quoteState'
 import year from './year'
 
 export default combineReducers( {
